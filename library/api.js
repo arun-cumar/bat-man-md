@@ -1,4 +1,4 @@
-// © 2025 arun•°Cumar. All Rights Reserved.
+// © 2026 arun•°Cumar. All Rights Reserved.
 
 import config from '../settings/config';
 import fetch from 'node-fetch';

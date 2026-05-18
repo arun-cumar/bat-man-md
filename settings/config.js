@@ -1,12 +1,12 @@
 
 //  2025 arun•°Cumar. All Rights Reserved.
 
-import fs = require('fs')
+import fs from "fs";
 
 const config = {
-    owner: "-",
+    owner: "arun•°Cumar",
     botNumber: "-",
-    setPair: "K0MRAID1",
+    setPair: "BAT-MAN",
     thumbUrl: "https://i.imgur.com/IkEv97P.jpeg",
     session: "sessions",
     status: {
@@ -15,39 +15,39 @@ const config = {
         reactsw: false
     },
     message: {
-        owner: "no, this is for owners only",
-        group: "this is for groups only",
-        admin: "this command is for admin only",
-        private: "this is specifically for private chat"
+        owner: "_no, this is for owners only_",
+        group: "_this is for groups only_",
+        admin: "_this command is for admin only_",
+        private: "_this is specifically for private chat_"
     },
     mess: {
-        owner: 'This command is only for the bot owner!',
-        done: 'Mode changed successfully!',
-        error: 'Something went wrong!',
-        wait: 'Please wait...'
+        owner: '_This command is only for the bot owner!_',
+        done: '_Mode changed successfully!_',
+        error: '_Something went wrong!_',
+        wait: '_Please wait..._'
     },
     settings: {
-        title: "Simple WA Base Bot",
-        packname: 'WA-BASE',
-        description: "this script was created by Debraj",
-        author: 'https://www.github.com/OfficialKango',
-        footer: "饾棈饾柧饾梾饾柧饾梹饾棆饾柡饾梿: @official_kango"
+        title: "_BAT-MAN WhatsApp Bot_",
+        packname: 'BAT-MAN',
+        description: "this script was created by arun•°Cumar",
+        author: 'https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24',
+        footer: "arun-cumar"
     },
     newsletter: {
-        name: "Simple WA Base Bot",
+        name: "BAT-MAN Bot",
         id: "0@newsletter"
     },
     api: {
-        baseurl: "https://hector-api.vercel.app/",
-        apikey: "hector"
+        baseurl: "https://batman-api.vercel.app/",
+        apikey: "arun"
     },
     sticker: {
-        packname: "Simple WA Base Bot",
-        author: "WA-BASE"
+        packname: "BAT-MAN",
+        author: "whatsapp Bot"
     }
 }
 
-module.exports = config;
+export default config;
 
 let file = require.resolve(__filename)
 require('fs').watchFile(file, () => {

@@ -379,10 +379,16 @@ ${pluginMenuSections}`;
     }
 };
 
-let file = require.resolve(__filename);
-require('fs').watchFile(file, () => {
-    require('fs').unwatchFile(file);
+ //watching 
+fs.watchFile(__filename, async () => {
+    // temporary stop
+    fs.unwatchFile(__filename);
+    
     console.log('\x1b[0;32m' + __filename + ' \x1b[1;32mupdated!\x1b[0m');
-    delete require.cache[file];
-    require(file);
+    
+    try {
+        await import(`./${path.basename(__filename)}${cacheBuster}`);
+    } catch (error) {
+        console.error('\x1b[1;31mError re-loading file:\x1b[0m', error);
+    }
 });

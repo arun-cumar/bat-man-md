@@ -1,4 +1,3 @@
-
 // © 2026 arun•°Cumar. All Rights Reserved.
 
 import chalk from "chalk";
@@ -36,6 +35,6 @@ import chalk from "chalk";
             console.log(chalk.bold.green('successfully connected to bot'))
         }
     }
-              }
+              
 
 export default connections;

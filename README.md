@@ -1,7 +1,4 @@
-# NEXA-BOT MD WhatsApp Bot 
-<p align="center">
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=45&duration=4000&pause=1000&color=00BFFF&center=true&vCenter=true&width=1000&height=200&lines=🔹+NEXA-BOT+MD+V2.0+🔹;💠+MODERN+|+SLEEK+|+POWERFUL;💎+CRAFTED+BY+arun•°Cumar;🚀+THE+NEXT+GEN+WHATSAPP+BOT;🌊+STAY+COOL+WITH+NEXA+BLUE" alt="Typing SVG" />
-</p>
+# BAT-MAN MD WhatsApp Bot 
 
 ---
 
@@ -29,8 +26,7 @@ npm start
 ```
 ⚙️ Configuration
 Before running npm start, ensure you have your environment variables set up (either in a .env file or directly in config.js):
- * SESSION_ID: Your json session code.
- * PREFIX: The symbol used to trigger commands (e.g., . or !).
+
  * OWNER_NUMBER: Your WhatsApp number.
 
 ## 🌟 Show your support

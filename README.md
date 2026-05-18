@@ -1,4 +1,4 @@
-# BAT-MAN MD WhatsApp Bot 
+### BAT-MAN MD WhatsApp Bot 
 
 ---
 
@@ -16,7 +16,7 @@ git clone https://github.com/arun-cumar/Nexa-Bot-Md.git && cd Nexa-Bot-Md
 🏗️ Step 2: Install Dependencies
 Install the required Node.js packages to ensure the bot functions correctly.
 ```bash
-npm install
+yarn install
 ```
 🚢 Step 3: Configure and Start
 Once the installation is complete, you can launch the bot using the command below. Make sure you have your SESSION_ID ready.

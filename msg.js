@@ -379,6 +379,9 @@ ${pluginMenuSections}`;
     }
 };
 
+const __filename = fileURLToPath(import.meta.url);
+const cacheBuster = `?update=${Date.now()}`;
+    
  //watching 
 fs.watchFile(__filename, async () => {
     // temporary stop

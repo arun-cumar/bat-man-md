@@ -1,8 +1,7 @@
 
-
 // © 2026 arun•°Cumar. All Rights Reserved.
 
-const chalk = require("chalk")
+import chalk from "chalk";
 
     connections = async ({ sock, update, clientstart, DisconnectReason, Boom }) => {
         const { connection, lastDisconnect } = update;

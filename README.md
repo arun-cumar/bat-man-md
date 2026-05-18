@@ -43,5 +43,5 @@ If you like this project, please give it a [⭐️ Star On Repo](https://github.
 -----
 
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&size=50&duration=2000&pause=1000&color=FF0000&center=true&vCenter=true&width=900&height=100&lines=Copyright+©️+2026+arun•°Cumar;All+Rights+Reserved.;⊹₊˚‧︵‿₊୨ᰔ୧₊‿︵‧˚₊⊹;" alt="Typing SVG" />
+<img src="https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&size=50&duration=2000&pause=1000&color=FF0000&center=true&vCenter=true&width=900&height=100&lines=Copyright+©️+2026+arun•°Cumar;All+Rights+Reserved.;" alt="Typing SVG" />
 </p>

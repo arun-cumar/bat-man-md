@@ -1,10 +1,10 @@
 {
-  "name": "nexa-bot-md",
-  "version": "2.1.0",
-  "description": "Advanced WhatsApp MD Bot powered by Baileys",
+  "name": "Bat-man",
+  "version": "v2.0",
+  "description": "Advanced WhatsApp Bot powered by Baileys",
   "main": "main.js",
   "type": "module",
-  "author": "Arun Cumar & Ansad",
+  "author": "arun•°Cumar",
   "license": "MIT",
   "scripts": {
     "start": "node main.js"

@@ -111,9 +111,11 @@ https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24
 
 ${config.settings.footer}`;
 
+ const finalAlive = aliveMessage[Math.floor(Math.random() * aliveMessage.length)];
+    
             await sock.sendMessage(m.chat, {
                 image: { url: config.thumbUrl },
-                caption: aliveMessage,
+                caption: finalAlive,
                 contextInfo: {
                     mentionedJid: [m.sender],
                     externalAdReply: {

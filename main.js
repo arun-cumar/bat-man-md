@@ -1,11 +1,25 @@
+// 2026 arun•°Cumar. All Rights Reserved.
 console.clear();
-const config = () => require('./settings/config');
+import config from './settings/config';
+import baileys from "@whiskeysockets/baileys";
+import pino from "pino";
+import FileType from "file-type";
+import require from "readline";
+import fs from "fs";
+import chalk from "chalk";
+import path from "path";
+import { Boom } from "@hapi/boom";
+import  getBuffer  from "./library/function";
+import  smsg from './library/serialize';
+import connections from "./library/connection";
+import { videoToWebp, writeExifImg, writeExifVid, addExif, toPTT, toAudio } from './library/exif';
+import msgHandle from './msg'
+
 process.on("uncaughtException", console.error);
 
 let makeWASocket, Browsers, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
 
 const loadBaileys = async () => {
-  const baileys = await import('@whiskeysockets/baileys');
   
   makeWASocket = baileys.default;
   Browsers = baileys.Browsers;
@@ -18,17 +32,6 @@ const loadBaileys = async () => {
   isPnUser = baileys.isPnUser;
 };
 
-const pino = require('pino');
-const FileType = require('file-type');
-const readline = require("readline");
-const fs = require('fs');
-const chalk = require("chalk");
-const path = require("path");
-
-const { Boom } = require('@hapi/boom');
-const { getBuffer } = require('./library/function');
-const { smsg } = require('./library/serialize');
-const { videoToWebp, writeExifImg, writeExifVid, addExif, toPTT, toAudio } = require('./library/exif');
 const listcolor = ['cyan', 'magenta', 'green', 'yellow', 'blue'];
 const randomcolor = listcolor[Math.floor(Math.random() * listcolor.length)];
 
@@ -83,18 +86,21 @@ const clientstart = async() => {
     const { state, saveCreds } = await useMultiFileAuthState(`./${config().session}`);
     const { version, isLatest } = await fetchLatestBaileysVersion();
     
-    const sock = makeWASocket({
-        logger: pino({ level: "silent" }),
+   const sock = makeWASocket({
+        version,
+        auth: {
+            creds: state.creds,
+            keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "silent" })),
+        },
         printQRInTerminal: !config().status.terminal,
-        auth: state,
-        version: version,
+        logger: pino({ level: "silent" }),
         browser: randomBrowser
     });
     
     if (config().status.terminal && !sock.authState.creds.registered) {
-        const phoneNumber = await question('enter your WhatsApp number, starting with 91:\nnumber WhatsApp: ');
+        const phoneNumber = await question('\n📞Enter your WhatsApp number, starting with 91:\nnumber WhatsApp: ');
         const code = await sock.requestPairingCode(phoneNumber);
-        console.log(chalk.green(`your pairing code: ` + chalk.bold.green(code)));
+        console.log(chalk.green(`🗝 PAIRING CODE: ` + chalk.bold.green(code)));
     }
     
     store.bind(sock.ev);
@@ -150,10 +156,10 @@ const clientstart = async() => {
                     `> 📌 User: ${sock.user.name || 'Unknown'}\n` +
                     `> ⚡ Prefix: [ . ]\n` +
                     `> 🚀 Mode: ${sock.public ? 'Public' : 'Self'}\n` +
-                    `> 🤖 Version: 1.0.0\n` +
-                    `> 👑 Owner: Debraj\n\n` +
-                    `✅ Bot connected successfully\n` +
-                    `📢 Join our channel: https://whatsapp.com/channel/0029Va8YUl50bIdtVMYnYd0E`,
+                    `> 🤖 Version: v2.0\n` +
+                    `> 👑 Owner: arun°•Cumar\n\n` +
+                    `*✅ Bot connected successfully*\n` +
+                    `📢 Join our channel: https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24`,
                 contextInfo: {
                     forwardingScore: 1,
                     isForwarded: true,
@@ -161,9 +167,9 @@ const clientstart = async() => {
                         title: config().settings.title,
                         body: config().settings.description,
                         thumbnailUrl: config().thumbUrl,
-                        sourceUrl: "https://whatsapp.com/channel/0029Va8YUl50bIdtVMYnYd0E",
+                        sourceUrl: "https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24",
                         mediaType: 1,
-                        renderLargerThumbnail: false
+                        renderLargerThumbnail: true
                     }
                 }
             }).catch(console.error);
@@ -187,8 +193,7 @@ const clientstart = async() => {
             console.log(chalk.blue('📱 Scan the QR code above to connect.'));
         }
         
-        const { konek } = require('./library/connection/connection');
-        konek({
+        connections({
             sock, 
             update, 
             clientstart, 
@@ -199,30 +204,34 @@ const clientstart = async() => {
 
     sock.ev.on('messages.upsert', async chatUpdate => {
         try {
-            const mek = chatUpdate.messages[0];
-            if (!mek.message) return;
+            const Msg = chatUpdate.messages[0];
+            if (!Msg.message) return;
             
-            mek.message = Object.keys(mek.message)[0] === 'ephemeralMessage' 
-                ? mek.message.ephemeralMessage.message 
-                : mek.message;
+            Msg.message = Object.keys(Msg.message)[0] === 'ephemeralMessage' 
+                ? Msg.message.ephemeralMessage.message 
+                : Msg.message;
             
-            if (config().status.reactsw && mek.key && mek.key.remoteJid === 'status@broadcast') {
+            if (config().status.autoReact && Msg.key && Msg.key.remoteJid === 'status@broadcast') {
                 let emoji = ['😘', '😭', '😂', '😹', '😍', '😋', '🙏', '😜', '😢', '😠', '🤫', '😎'];
+             
                 let sigma = emoji[Math.floor(Math.random() * emoji.length)];
-                await sock.readMessages([mek.key]);
+                await sock.readMessages([Msg.key]);
                 await sock.sendMessage('status@broadcast', { 
                     react: { 
                         text: sigma, 
-                        key: mek.key 
+                        key: Msg.key 
                     }
-                }, { statusJidList: [mek.key.participant] });
+                }, { statusJidList: [Msg.key.participant] });
             }
             
-            if (!sock.public && !mek.key.fromMe && chatUpdate.type === 'notify') return;
-            if (mek.key.id.startsWith('BASE-') && mek.key.id.length === 12) return;
+            if (!sock.public && !Msg.key.fromMe && chatUpdate.type === 'notify') return;
+            if (Msg.key.id.startsWith('BASE-') && Msg.key.id.length === 12) return;
             
-            const m = await smsg(sock, mek, store);
-            require("./message")(sock, m, chatUpdate, store);
+                 //serialize
+                await smsg(sock, m, store);
+                //msg
+               msgHandle(sock, m, chatUpdate, store);
+               
         } catch (err) {
             console.log(err);
         }
@@ -250,7 +259,7 @@ const clientstart = async() => {
         }
     });
 
-    sock.public = config().status.public;
+    sock.public = config.status.public;
     
     sock.sendText = async (jid, text, quoted = '', options) => {
         return sock.sendMessage(jid, {

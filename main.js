@@ -4,7 +4,7 @@ import config from './settings/config';
 import baileys from "@whiskeysockets/baileys";
 import pino from "pino";
 import FileType from "file-type";
-import require from "readline";
+import readline from "readline";
 import fs from "fs";
 import chalk from "chalk";
 import path from "path";

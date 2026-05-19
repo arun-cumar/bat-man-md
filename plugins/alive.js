@@ -50,8 +50,30 @@ function runtime(seconds) {
             const platform = os.platform();
             const arch = os.arch();
             const cpu = os.cpus()[0].model;
-
+            const host = os.platform();
+            
             const aliveMessage = 
+`✨ *${config.settings.title} is Watching Over You* ✨
+
+╔═══════════════════
+║  🏰 *ROYAL STATUS*
+╠═══════════════════
+║ ♕ *User:* ${userName}
+║ ⏳ *Uptime:* ${botUptime}
+║ 💾 *Memory:* ${usedMemory}MB / ${totalMemory}GB
+║ ⚡ *Speed:* ${ping}ms
+║ 🖥️ *Platform:* ${host}
+║ 📜 *Creator:* ${config.owner}
+╚═══════════════════
+
+*"A queen never sleeps, and neither do I"*
+
+👑 Serving the kingdom since deployment
+📜 Developed by: ${config.settings.author}
+
+🎭 *Join the Royal Court:*
+https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24`,
+                
 `🧙‍♀️ *${config.settings.title} - The Magical Assistant* 🪄
 
 ┌─✦ *ENCHANTED STATUS*

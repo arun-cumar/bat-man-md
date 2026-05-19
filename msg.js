@@ -208,7 +208,9 @@ class PluginLoader {
 // Initialize plugin loader
 const pluginLoader = new PluginLoader();
 
-module.exports = sock = async (sock, m, chatUpdate, store) => {
+   // msgHandle 
+   const msgHandle = async (sock, m, chatUpdate, store) => {
+       
     try {
         if (!jidNormalizedUser || !getContentType || !isPnUser) {
             await loadBaileysUtils();
@@ -378,7 +380,8 @@ ${pluginMenuSections}`;
         console.log(require("util").format(err));
     }
 };
-
+export default msgHandle;
+    
 const __filename = fileURLToPath(import.meta.url);
 const cacheBuster = `?update=${Date.now()}`;
     

@@ -12,8 +12,8 @@ import { tempfiles } from "./library/upload";
 import { fquoted } from './library/quoted';     
 import api from './library/api';
 
-const image = fs.readFileSync('./thumbnail/image.jpg');
-const docu = fs.readFileSync('./thumbnail/document.jpg');
+const image = fs.readFileSync('./media/image.jpg');
+const docu = fs.readFileSync('./media/document.jpg');
 
 let jidNormalizedUser, getContentType, isPnUser;
 

@@ -3,7 +3,7 @@ console.clear();
 import config from './settings/config';
 import baileys from "@whiskeysockets/baileys";
 import pino from "pino";
-import FileType from "file-type";
+import { fileTypeFromFile } from 'file-type';
 import readline from "readline";
 import fs from "fs";
 import chalk from "chalk";

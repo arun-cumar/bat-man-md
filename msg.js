@@ -6,18 +6,18 @@ import os from 'os';
 import chalk from "chalk";
 import axios from 'axios';
 import { exec } from 'child_process';
+import baileys from "@whiskeysockets/baileys";
 import { dechtml, fetchWithTimeout } from "./library/function";       
 import { tempfiles } from "./library/upload";
 import { fquoted } from './library/quoted';     
 import api from './library/api';
 
-import image = fs.readFileSync('./thumbnail/image.jpg');
-import docu = fs.readFileSync('./thumbnail/document.jpg');
+const image = fs.readFileSync('./thumbnail/image.jpg');
+const docu = fs.readFileSync('./thumbnail/document.jpg');
 
 let jidNormalizedUser, getContentType, isPnUser;
 
 const loadBaileysUtils = async () => {
-    const baileys = await import('@whiskeysockets/baileys');
     jidNormalizedUser = baileys.jidNormalizedUser;
     getContentType = baileys.getContentType;
     isPnUser = baileys.isPnUser;
@@ -172,7 +172,7 @@ class PluginLoader {
             const sortedCommands = commands.sort();
             const commandList = sortedCommands.map(cmd => {
                 const plugin = this.plugins.get(cmd);
-                return `︱✗ ${cmd}${plugin.description ? ` - ${plugin.description}` : ''}`;
+                return `┋✗ ${cmd}${plugin.description ? ` - ${plugin.description}` : ''}`;
             }).join('\n');
             
             sections.push(`╾─╼▣ ${categoryName}\n${commandList}\n╿─╼▣`);
@@ -330,37 +330,41 @@ const pluginLoader = new PluginLoader();
                 const pluginMenuSections = pluginLoader.getMenuSections();
                 const totalCommands = pluginLoader.getPluginCount();
 
-                const K0MRAID = `
-╔〘 *WA-BASE-BOT* 
-║ 👑 *Owner:* Debraj 
-║ 🧩 *Prefix:* [ . ]
-║ 🖥️ *Host:* ${host}
-║ 🧠 *Commands:* ${totalCommands}
-║ ⚙️ *Mode:* ${mode}
-║ ⏱️ *Uptime:* ${uptime}
-║ ⚡ *Ping:* ${ping.toFixed(0)} ms
-║ 📊 *RAM Used:* ${usedMem.toFixed(2)} MB / ${totalMem.toFixed(2)} GB
-║ 🧬 *RAM:* [${ramBar}] ${memPercent.toFixed(2)}%
-╚═〘 *System Status*
+                const menuText = `
+╭══〘 `BAT-MAN `〙═⊷❍
+┃✦╭─────────❍
+┃✦│ 👑 *Owner:* ${config().owner}
+┃✦│  🧩 *Prefix:* [ . ]
+┃✦│  🖥️ *Host:* ${host}
+┃✦│  🧠 *Commands:* ${totalCommands}
+┃✦│  ⚙️ *Mode:* ${mode}
+┃✦│  ⏱️ *Uptime:* ${uptime}
+┃✦│ ⚡ *Ping:* ${ping.toFixed(0)} ms
+┃✦│  📊 *RAM Used:* ${usedMem.toFixed(2)} MB / ${totalMem.toFixed(2)} GB
+┃✦║ 🧬 *RAM:* [${ramBar}] ${memPercent.toFixed(2)}%
+┃✦│  *System Status*
+┃✦╰─────────❍
+╰══════════⊷❍
+
 
 ${pluginMenuSections}`;
 
                 await sock.sendMessage(m.chat, {
                     image: image,
-                    caption: K0MRAID,
+                    caption: menuText,
                     contextInfo: {
                         mentionedJid: [m.sender],
                         forwardingScore: 1,
-                        isForwarded: false,
+                        isForwarded: true,
                         externalAdReply: {
-                            title: "Simple WA Base Bot",
-                            body: "Official Dev Account URL",
+                            title: "BAT-MAN-MD",
+                            body: "arun•°Cumar",
                             mediaType: 3,
                             thumbnailUrl: config.thumbUrl,
-                            mediaUrl: "https://t.me/debrajzero",
-                            sourceUrl: "https://t.me/debrajzero",
-                            showAdAttribution: true,
-                            renderLargerThumbnail: false
+                            mediaUrl: "https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24",
+                            sourceUrl: "https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24",
+                            showAdAttribution: false,
+                            renderLargerThumbnail: true
                         }
                     }
                 }, { quoted: m });
@@ -380,6 +384,7 @@ ${pluginMenuSections}`;
         console.log(require("util").format(err));
     }
 };
+
 export default msgHandle;
     
 const __filename = fileURLToPath(import.meta.url);

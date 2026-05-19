@@ -1,5 +1,6 @@
 // 2026 arun•°Cumar. All Rights Reserved.
 console.clear();
+process.on("uncaughtException", console.error);
 import config from './settings/config';
 import baileys from "@whiskeysockets/baileys";
 import pino from "pino";
@@ -14,8 +15,6 @@ import  smsg from './library/serialize';
 import connections from "./library/connection";
 import { videoToWebp, writeExifImg, writeExifVid, addExif, toPTT, toAudio } from './library/exif';
 import msgHandle from './msg'
-
-process.on("uncaughtException", console.error);
 
 let makeWASocket, Browsers, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
 
@@ -449,10 +448,22 @@ const ignoredErrors = [
     'Value not found'
 ];
 
-let file = require.resolve(__filename);
-require('fs').watchFile(file, () => {
-  delete require.cache[file];
-  require(file);
+    
+const __filename = fileURLToPath(import.meta.url);
+const cacheBuster = `?update=${Date.now()}`;
+    
+ //watching 
+fs.watchFile(__filename, async () => {
+    // temporary stop
+    fs.unwatchFile(__filename);
+    
+    console.log('\x1b[0;32m' + __filename + ' \x1b[1;32mupdated!\x1b[0m');
+    
+    try {
+        await import(`./${path.basename(__filename)}${cacheBuster}`);
+    } catch (error) {
+        console.error('\x1b[1;31mError re-loading file:\x1b[0m', error);
+    }
 });
 
 process.on('unhandledRejection', reason => {

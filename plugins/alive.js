@@ -52,6 +52,23 @@ function runtime(seconds) {
             const cpu = os.cpus()[0].model;
 
             const aliveMessage = 
+`🧙‍♀️ *${config.settings.title} - The Magical Assistant* 🪄
+
+┌─✦ *ENCHANTED STATUS*
+│✨ *Sorcerer:* ${userName}
+│⏳ *Active Time:* ${botUptime}
+│💫 *Magic Power:* ${usedMemory}MB
+│⚡ *Spell Speed:* ${ping}ms
+│📚 *Library:* ${config.settings.author}
+│👑 *Archmage:* ${config.owner}
+└─✦────────────◉
+
+*"Magic flows through every command I cast"*
+
+🪄 *Channel Your Magic:*
+https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24`,
+                
+                
 `🤖 *${config.settings.title} - SYSTEM STATUS*
 
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬

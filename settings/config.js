@@ -12,7 +12,7 @@ const config = {
     status: {
         public: true,
         terminal: true,
-        reactsw: false
+        autoReact: false
     },
     message: {
         owner: "_no, this is for owners only_",

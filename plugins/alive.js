@@ -37,9 +37,13 @@ function runtime(seconds) {
         sender
     }) => {
         try {
+
+            const emojis = ["⚡","❤","🚀","🔋","🫀","🔛","🧨"];
+            const finalEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+    
             // Tech reaction
             await sock.sendMessage(m.chat, { 
-                react: { text: "⚡", key: m.key } 
+                react: { text: finalEmoji, key: m.key } 
             });
 
             const userName = m.pushName || "User";
@@ -103,7 +107,7 @@ https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24`,
 
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 🔧 **DEVELOPER**: ${config.owner}
-📁 **REPOSITORY**: ${config.settings.author}
+📁 **CHANNEL**: ${config.settings.author}
 💬 **DESCRIPTION**: ${config.settings.description}
 
 🔗 **OFFICIAL CHANNEL**:
@@ -127,7 +131,7 @@ ${config.settings.footer}`;
                     }
                 }
             }, { quoted: m });
-
+            
             // Technical success reaction
             await sock.sendMessage(m.chat, { 
                 react: { text: "✅", key: m.key } 

@@ -36,6 +36,24 @@ const loadBaileys = async () => {
 const sessionPath = path.join(process.cwd(), "session");
 const credsPath = path.join(sessionPath, "creds.json"); 
 
+startServer() => {
+    const app = express();
+    const port = process.env.PORT || 3000;
+    
+    app.get("/", (req, res) => res.send("BAT-MAN is Alive! 🚀..."));
+    
+    app.listen(port, () => {
+        console.log(chalk.green.bold(`
+╔═════════════════════╗
+○ BAT-MAN MD 
+○ 🦇 V2.0     
+╠═════════════════════╣
+⊙ Developer by arun•°Cumar
+╚═════════════════════╝
+🌐 Uptime server running on port ${port} `));
+    });
+};
+
 restoreSession() => {
     const sessionData = (process.env.SESSION_ID ||  "").trim();
 

@@ -334,13 +334,13 @@ const pluginLoader = new PluginLoader();
 ╭══〘 `BAT-MAN `〙═⊷❍
 ┃✦╭─────────❍
 ┃✦│ 👑 *Owner:* ${config().owner}
-┃✦│  🧩 *Prefix:* [ . ]
-┃✦│  🖥️ *Host:* ${host}
-┃✦│  🧠 *Commands:* ${totalCommands}
-┃✦│  ⚙️ *Mode:* ${mode}
-┃✦│  ⏱️ *Uptime:* ${uptime}
+┃✦│ 🧩 *Prefix:* [ . ]
+┃✦│ 🖥️ *Host:* ${host}
+┃✦│ 🧠 *Commands:* ${totalCommands}
+┃✦│ ⚙️ *Mode:* ${mode}
+┃✦│ ⏱️ *Uptime:* ${uptime}
 ┃✦│ ⚡ *Ping:* ${ping.toFixed(0)} ms
-┃✦│  📊 *RAM Used:* ${usedMem.toFixed(2)} MB / ${totalMem.toFixed(2)} GB
+┃✦│ 📊 *RAM Used:* ${usedMem.toFixed(2)} MB / ${totalMem.toFixed(2)} GB
 ┃✦║ 🧬 *RAM:* [${ramBar}] ${memPercent.toFixed(2)}%
 ┃✦│  *System Status*
 ┃✦╰─────────❍

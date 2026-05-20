@@ -16,7 +16,7 @@ import connections from "./library/connection";
 import { videoToWebp, writeExifImg, writeExifVid, addExif, toPTT, toAudio } from './library/exif';
 import msgHandle from './msg'
 
-let makeWASocket, Browsers, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
+let makeWASocket, Browsers, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
 
 const loadBaileys = async () => {
   
@@ -29,10 +29,29 @@ const loadBaileys = async () => {
   downloadContentFromMessage = baileys.downloadContentFromMessage;
   jidNormalizedUser = baileys.jidNormalizedUser;
   isPnUser = baileys.isPnUser;
+  makeCacheableSignalKeyStore = baileys.makeCacheableSignalKeyStore;
 };
 
-const listcolor = ['cyan', 'magenta', 'green', 'yellow', 'blue'];
-const randomcolor = listcolor[Math.floor(Math.random() * listcolor.length)];
+
+const sessionPath = path.join(process.cwd(), "session");
+const credsPath = path.join(sessionPath, "creds.json"); 
+
+restoreSession() => {
+    const sessionData = (process.env.SESSION_ID ||  "").trim();
+
+    if (sessionData && !fs.existsSync(credsPath)) {
+        if (!fs.existsSync(sessionPath)) {
+            fs.mkdirSync(sessionPath, { recursive: true });
+        }
+
+        try {
+            fs.writeFileSync(credsPath, sessionData.trim());
+            console.log("✅ Session file restored from ENV");
+              } catch (err) {
+                   console.error("❌ Session restore failed:", err.message);
+                 }
+           }
+     };
 
 const question = (text) => {
     const rl = readline.createInterface({
@@ -82,7 +101,7 @@ const clientstart = async() => {
         }
     };
     
-    const { state, saveCreds } = await useMultiFileAuthState(`./${config().session}`);
+    const { state, saveCreds } = await useMultiFileAuthState(`./${config().session}, sessionPath`);
     const { version, isLatest } = await fetchLatestBaileysVersion();
     
    const sock = makeWASocket({

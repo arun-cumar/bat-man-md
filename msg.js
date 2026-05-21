@@ -7,10 +7,10 @@ import chalk from "chalk";
 import axios from 'axios';
 import { exec } from 'child_process';
 import baileys from "@whiskeysockets/baileys";
-import { dechtml, fetchWithTimeout } from "./library/function";       
-import { tempfiles } from "./library/upload";
-import { fquoted } from './library/quoted';     
-import api from './library/api';
+import { dechtml, fetchWithTimeout } from "./library/function.js";       
+import { tempfiles } from "./library/upload.js";
+import { fquoted } from './library/quoted.js';     
+import api from './library/api.js';
 
 const image = fs.readFileSync('./media/image.jpg');
 const docu = fs.readFileSync('./media/document.jpg');

@@ -172,7 +172,7 @@ class PluginLoader {
             const sortedCommands = commands.sort();
             const commandList = sortedCommands.map(cmd => {
                 const plugin = this.plugins.get(cmd);
-                return `┋✗ ${cmd}${plugin.description ? ` - ${plugin.description}` : ''}`;
+                return `┃✧│ ${cmd}${plugin.description ? ` - ${plugin.description}` : ''}`;
             }).join('\n');
             
             sections.push(`╾─╼▣ ${categoryName}\n${commandList}\n╿─╼▣`);

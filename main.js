@@ -1,7 +1,7 @@
 // 2026 arun•°Cumar. All Rights Reserved.
 console.clear();
 process.on("uncaughtException", console.error);
-import config from './settings/config';
+import config from './settings/config.js';
 import baileys from "@whiskeysockets/baileys";
 import pino from "pino";
 import FileType from 'file-type';
@@ -10,11 +10,11 @@ import fs from "fs";
 import chalk from "chalk";
 import path from "path";
 import { Boom } from "@hapi/boom";
-import  getBuffer  from "./library/function";
-import  smsg from './library/serialize';
-import connections from "./library/connection";
-import { videoToWebp, writeExifImg, writeExifVid, addExif, toPTT, toAudio } from './library/exif';
-import msgHandle from './msg'
+import  getBuffer  from "./library/function.js";
+import  smsg from './library/serialize.js';
+import connections from "./library/connection.js";
+import { videoToWebp, writeExifImg, writeExifVid, addExif, toPTT, toAudio } from './library/exif.js';
+import msgHandle from './msg.js';
 
 let makeWASocket, Browsers, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
 

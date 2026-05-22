@@ -11,7 +11,9 @@ import { dechtml, fetchWithTimeout } from "./library/function.js";
 import { tempfiles } from "./library/upload.js";
 import { fquoted } from './library/quoted.js';     
 import api from './library/api.js';
+import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);   
 const image = fs.readFileSync('./media/image.jpg');
 const docu = fs.readFileSync('./media/document.jpg');
 
@@ -24,6 +26,8 @@ const loadBaileysUtils = async () => {
 };
 
 // Plugin Loader System with Menu Categorization
+const __dirname = path.dirname(__filename); 
+
 class PluginLoader {
     constructor() {
         this.plugins = new Map();
@@ -43,7 +47,7 @@ class PluginLoader {
         this.loadPlugins();
     }
 
-    loadPlugins() {
+    async loadPlugins() {
         try {
             // Create plugins directory if it doesn't exist
             if (!fs.existsSync(this.pluginsDir)) {
@@ -70,7 +74,7 @@ class PluginLoader {
             for (const file of pluginFiles) {
                 try {
                     const pluginPath = path.join(this.pluginsDir, file);
-                    const plugin = require(pluginPath);
+                    const plugin = import(pluginPath);
                     
                     if (plugin.command && typeof plugin.execute === 'function') {
                         // Set default category if not provided
@@ -371,7 +375,7 @@ ${pluginMenuSections}`;
                 break;
             }
             
-            case 'reload': {
+            case 'update': {
                 if (!isCreator) return; // Silent - don't respond
                 pluginLoader.reloadPlugins();
                 await reply(`✅ Plugins reloaded! Loaded ${pluginLoader.getPluginCount()} commands across ${pluginLoader.categories.size} categories.`);
@@ -386,8 +390,8 @@ ${pluginMenuSections}`;
 };
 
 export default msgHandle;
-    
-const __filename = fileURLToPath(import.meta.url);
+
+
 const cacheBuster = `?update=${Date.now()}`;
     
  //watching 

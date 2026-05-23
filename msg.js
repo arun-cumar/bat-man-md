@@ -16,7 +16,24 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);   
 const image = fs.readFileSync('./media/image.jpg');
 const docu = fs.readFileSync('./media/document.jpg');
-
+const menuDesign = [
+                    "┃✧│",
+                    "┃✦│", 
+                    "┃★│", 
+                    "┃☆│",
+                    "┃⍟│",
+                    "┃✽│",
+                    "┃❀│",
+                    "┃✿│",
+                    "┃✭│",
+                    "┃ᥫ᭡│",
+                    "┃♡│",
+                    "┃✭│"
+                    "┃✯│",
+                    "┃✺│"
+                ];
+const randomDesigns = Math.floor(menuDesign[Math.random(menuDesign * menuDesign.length)]); 
+                
 let jidNormalizedUser, getContentType, isPnUser;
 
 const loadBaileysUtils = async () => {
@@ -176,23 +193,6 @@ class PluginLoader {
             const sortedCommands = commands.sort();
             const commandList = sortedCommands.map(cmd => {
                 const plugin = this.plugins.get(cmd);
-                const menuDesign = [
-                    "┃✧│",
-                    "┃✦│", 
-                    "┃★│", 
-                    "┃☆│",
-                    "┃⍟│",
-                    "┃✽│",
-                    "┃❀│",
-                    "┃✿│",
-                    "┃✭│",
-                    "┃ᥫ᭡│",
-                    "┃♡│",
-                    "┃✭│"
-                    "┃✯│",
-                    "┃✺│"
-                ];
-                const randomDesigns = Math.floor(menuDesign[Math.random(menuDesign * menuDesign.length)]); 
                 return `${randomDesigns} ${cmd}${plugin.description ? ` - ${plugin.description}` : ''}`;
             }).join('\n');
             
@@ -353,18 +353,18 @@ const pluginLoader = new PluginLoader();
 
                 const menuText = `
 ╭══〘 `BAT-MAN `〙═⊷❍
-┃✦╭─────────❍
-┃✦│ 👑 *Owner:* ${config().owner}
-┃✦│ 🧩 *Prefix:* [ . ]
-┃✦│ 🖥️ *Host:* ${host}
-┃✦│ 🧠 *Commands:* ${totalCommands}
-┃✦│ ⚙️ *Mode:* ${mode}
-┃✦│ ⏱️ *Uptime:* ${uptime}
-┃✦│ ⚡ *Ping:* ${ping.toFixed(0)} ms
-┃✦│ 📊 *RAM Used:* ${usedMem.toFixed(2)} MB / ${totalMem.toFixed(2)} GB
-┃✦║ 🧬 *RAM:* [${ramBar}] ${memPercent.toFixed(2)}%
-┃✦│  *System Status*
-┃✦╰─────────❍
+┃${randomDesigns}╭─────────❍
+┃${randomDesigns}│ 👑 *Owner:* ${config().owner}
+┃${randomDesigns}│ 🧩 *Prefix:* [ . ]
+┃${randomDesigns}│ 🖥️ *Host:* ${host}
+┃${randomDesigns}│ 🧠 *Commands:* ${totalCommands}
+┃${randomDesigns}│ ⚙️ *Mode:* ${mode}
+┃${randomDesigns}│ ⏱️ *Uptime:* ${uptime}
+┃${randomDesigns}│ ⚡ *Ping:* ${ping.toFixed(0)} ms
+┃${randomDesigns}│ 📊 *RAM Used:* ${usedMem.toFixed(2)} MB / ${totalMem.toFixed(2)} GB
+┃${randomDesigns}║ 🧬 *RAM:* [${ramBar}] ${memPercent.toFixed(2)}%
+┃${randomDesigns}│  *System Status*
+┃${randomDesigns}╰─────────❍
 ╰══════════⊷❍
 
 

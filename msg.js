@@ -17,21 +17,18 @@ const __filename = fileURLToPath(import.meta.url);
 const image = fs.readFileSync('./media/image.jpg');
 const docu = fs.readFileSync('./media/document.jpg');
 const menuDesign = [
-                    "┃✧│",
-                    "┃✦│", 
-                    "┃★│", 
-                    "┃☆│",
-                    "┃⍟│",
-                    "┃✽│",
-                    "┃❀│",
-                    "┃✿│",
-                    "┃✭│",
-                    "┃ᥫ᭡│",
-                    "┃♡│",
-                    "┃✭│"
-                    "┃✯│",
-                    "┃✺│"
+                        "┃𒀭│",
+                 "┃❆│","┃❅│","┃❃│",
+                 "┃✥│","┃۞│","┃𐙚│",
+                 "┃𖦹│","┃𖤓│","┃𑁍│",
+                 "┃❁│","┃ꕤ│","┃✧│",
+                 "┃✦│","┃★│","┃☆│",
+                 "┃⍟│","┃✽│","┃❀│",
+                 "┃✿│","┃✭│","┃ᥫ᭡│",
+                 "┃♡│","┃◇│","┃✯│",
+                 "┃♧│","┃♤│","┃✺│"                
                 ];
+
 const randomDesigns = Math.floor(menuDesign[Math.random(menuDesign * menuDesign.length)]); 
                 
 let jidNormalizedUser, getContentType, isPnUser;

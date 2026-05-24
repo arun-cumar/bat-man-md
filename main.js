@@ -14,7 +14,6 @@ import { getBuffer } from "./library/function.js";
 import  smsg from './library/serialize.js';
 import connections from "./library/connection.js";
 import { videoToWebp, writeExifImg, writeExifVid, addExif, toPTT, toAudio } from './library/exif.js';
-import msgHandle from './msg.js';
 
 let makeWASocket, Browsers, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
 
@@ -265,7 +264,7 @@ const clientstart = async() => {
                  //serialize
                 await smsg(sock, m, store);
                 //msg
-               msgHandle(sock, m, chatUpdate, store);
+               await import("./msg.js").default(sock, m, chatUpdate, store);
                
         } catch (err) {
             console.log(err);

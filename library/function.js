@@ -5,7 +5,7 @@ import axios from 'axios';
 import moment from 'moment-timezone';
 import { sizeFormatter } from 'human-readable';
 import util from 'util';
-import {jimp} from 'jimp';
+import { Jimp } from 'jimp';
 import vm from "vm";
 import CryptoJS from "crypto-js";
 

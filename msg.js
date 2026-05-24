@@ -1,4 +1,4 @@
-import config from './settings/config';
+import config from './settings/config.js';
 import fs from 'fs';
 import crypto from "crypto";
 import path from "path";

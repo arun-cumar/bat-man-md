@@ -43,8 +43,7 @@
         "util": "^0.12.4",
         "vm": "latest",
         "yt-search": "^2.12.1"
-    }
-
+      
   },
   "devDependencies": {
     "eslint": "^9.0.0",

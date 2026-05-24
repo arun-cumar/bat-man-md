@@ -63,7 +63,6 @@ const question = (text) => {
 ╚═════════════════════╝
 🌐 Uptime server running on port ${port} `));
     });
-};
 
   //SESSION 
     const sessionData = (process.env.SESSION_ID ||  "").trim();
@@ -79,9 +78,8 @@ const question = (text) => {
               } catch (err) {
                    console.error("❌ Session restore failed:", err.message);
                  }
-           }
-     };
-
+           };
+     
 const clientstart = async() => {
     await loadBaileys();
     

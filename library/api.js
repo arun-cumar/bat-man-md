@@ -1,6 +1,6 @@
 // © 2026 arun•°Cumar. All Rights Reserved.
 
-import config from '../settings/config';
+import config from '../settings/config.js';
 import fetch from 'node-fetch';
 
 const api = {

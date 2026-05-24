@@ -1,5 +1,5 @@
 import FormData from "form-data";
-import fetch "node-fetch";
+import fetch from "node-fetch";
 
 async function tempfiles(buffer, filename = "BAT-MAN.jpg") {
     const buf = Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer);

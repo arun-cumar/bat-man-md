@@ -2,7 +2,7 @@
 
 import chalk from "chalk";
 
-    connections = async ({ sock, update, clientstart, DisconnectReason, Boom }) => {
+    const connections = async ({ sock, update, clientstart, DisconnectReason, Boom }) => {
         const { connection, lastDisconnect } = update;
         if (connection === 'close') {
             let reason = new Boom(lastDisconnect?.error)?.output.statusCode;

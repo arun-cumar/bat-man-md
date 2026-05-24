@@ -1,7 +1,7 @@
 import FormData from "form-data";
 import fetch from "node-fetch";
 
-async function tempfiles(buffer, filename = "BAT-MAN.jpg") {
+const tempfiles = async function(buffer, filename = "BAT-MAN.jpg") {
     const buf = Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer);
     const form = new FormData();
     form.append("file", buf, { 

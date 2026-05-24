@@ -32,9 +32,21 @@ const loadBaileys = async () => {
   makeCacheableSignalKeyStore = baileys.makeCacheableSignalKeyStore;
 };
 
-
 const sessionPath = path.join(process.cwd(), "session");
 const credsPath = path.join(sessionPath, "creds.json"); 
+
+const question = (text) => {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+    return new Promise((resolve) => {
+        rl.question(chalk.yellow(text), (answer) => {
+            resolve(answer);
+            rl.close();
+        });
+    });
+};
 
 startServer() => {
     const app = express();
@@ -70,19 +82,6 @@ restoreSession() => {
                  }
            }
      };
-
-const question = (text) => {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    return new Promise((resolve) => {
-        rl.question(chalk.yellow(text), (answer) => {
-            resolve(answer);
-            rl.close();
-        });
-    });
-};
 
 const clientstart = async() => {
     await loadBaileys();

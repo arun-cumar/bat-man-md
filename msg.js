@@ -8,8 +8,8 @@ import axios from 'axios';
 import { exec } from 'child_process';
 import baileys from "@whiskeysockets/baileys";
 import { dechtml, fetchWithTimeout } from "./library/function.js";       
-import { tempfiles } from "./library/upload.js";
-import { fquoted } from './library/quoted.js';     
+import tempfiles from "./library/upload.js";
+import fquoted  from './library/quoted.js';     
 import api from './library/api.js';
 import { fileURLToPath } from "url";
 

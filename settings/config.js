@@ -1,7 +1,7 @@
 //  2025 arun•°Cumar. All Rights Reserved.
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } fron "url";
+import { fileURLToPath } from "url";
 
 const config = {
     owner: "arun•°Cumar",

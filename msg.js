@@ -209,7 +209,7 @@ class PluginLoader {
         return count;
     }
 
-    reloadPlugins() {
+  async reloadPlugins() {
         // Clear require cache for plugin files
         const pluginFiles = fs.readdirSync(this.pluginsDir).filter(file => 
             file.endsWith('.js') && !file.startsWith('_')

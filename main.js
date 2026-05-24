@@ -47,7 +47,7 @@ const question = (text) => {
     });
 };
 
-startServer = () => {
+//server
     const app = express();
     const port = process.env.PORT || 3000;
     
@@ -56,16 +56,16 @@ startServer = () => {
     app.listen(port, () => {
         console.log(chalk.green.bold(`
 ╔═════════════════════╗
-○ BAT-MAN MD 
-○ 🦇 V2.0     
+○            BAT-MAN MD 
+○              🦇 V2.0     
 ╠═════════════════════╣
-⊙ Developer by arun•°Cumar
+⊙     Developer by arun•°Cumar
 ╚═════════════════════╝
 🌐 Uptime server running on port ${port} `));
     });
 };
 
-restoreSession = () => {
+  //SESSION 
     const sessionData = (process.env.SESSION_ID ||  "").trim();
 
     if (sessionData && !fs.existsSync(credsPath)) {

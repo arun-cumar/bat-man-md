@@ -7,6 +7,7 @@ import pino from "pino";
 import { fileTypeFromBuffer } from 'file-type';
 import readline from "readline";
 import fs from "fs";
+import express from "express";
 import chalk from "chalk";
 import path from "path";
 import { Boom } from "@hapi/boom";

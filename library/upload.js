@@ -21,5 +21,5 @@ const tempfiles = async function(buffer, filename = "BAT-MAN.jpg") {
     return `https://tmpfiles.org/dl/${id}/${filename}`;
 }
 
-exports default tempfiles;
+export default tempfiles;
 

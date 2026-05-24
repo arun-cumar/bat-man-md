@@ -29,8 +29,8 @@ const menuDesign = [
                  "┃♧│","┃♤│","┃✺│"                
                 ];
 
-const randomDesigns = Math.floor(menuDesign[Math.random(menuDesign * menuDesign.length)]); 
-                
+const randomDesigns =  menuDesign[Math.floor(Math.random() * menuDesign.length)];
+
 let jidNormalizedUser, getContentType, isPnUser;
 
 const loadBaileysUtils = async () => {
@@ -86,7 +86,8 @@ class PluginLoader {
 
             // Load each plugin
             for (const file of pluginFiles) {
-                try {
+              
+              try {
                     const pluginPath = path.join(this.pluginsDir, file);
                     const plugin = import(pluginPath);
                     

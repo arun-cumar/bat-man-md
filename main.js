@@ -48,7 +48,7 @@ const question = (text) => {
     });
 };
 
-startServer() => {
+startServer = () => {
     const app = express();
     const port = process.env.PORT || 3000;
     
@@ -66,7 +66,7 @@ startServer() => {
     });
 };
 
-restoreSession() => {
+restoreSession = () => {
     const sessionData = (process.env.SESSION_ID ||  "").trim();
 
     if (sessionData && !fs.existsSync(credsPath)) {

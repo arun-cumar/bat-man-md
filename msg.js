@@ -16,6 +16,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);   
 const image = fs.readFileSync('./media/image.jpg');
 const docu = fs.readFileSync('./media/document.jpg');
+const cacheBuster = `?update=${Date.now()}`;
 const menuDesign = [
                         "┃𒀭│",
                  "┃❆│","┃❅│","┃❃│",
@@ -216,7 +217,8 @@ class PluginLoader {
 
         for (const file of pluginFiles) {
             const pluginPath = path.join(this.pluginsDir, file);
-            delete require.cache[require.resolve(pluginPath)];
+            const freshPath = `${pluginPath}?v=${cacheBuster}`;
+            const plugin = await import(freshPath);
         }
 
         // Reload plugins
@@ -404,11 +406,8 @@ ${pluginMenuSections}`;
     }
 };
 
-export default msgHandle;
+export default msgHandle; 
 
-
-const cacheBuster = `?update=${Date.now()}`;
-    
  //watching 
 fs.watchFile(__filename, async () => {
     // temporary stop

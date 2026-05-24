@@ -4,7 +4,7 @@ process.on("uncaughtException", console.error);
 import config from './settings/config.js';
 import baileys from "@whiskeysockets/baileys";
 import pino from "pino";
-import FileType from 'file-type';
+import { fileTypeFromBuffer } from 'file-type';
 import readline from "readline";
 import fs from "fs";
 import chalk from "chalk";

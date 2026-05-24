@@ -10,7 +10,7 @@ import fs from "fs";
 import chalk from "chalk";
 import path from "path";
 import { Boom } from "@hapi/boom";
-import  getBuffer  from "./library/function.js";
+import { getBuffer } from "./library/function.js";
 import  smsg from './library/serialize.js';
 import connections from "./library/connection.js";
 import { videoToWebp, writeExifImg, writeExifVid, addExif, toPTT, toAudio } from './library/exif.js';

@@ -1,4 +1,3 @@
-
 // © 2026 arun•°Cumar. All Rights Reserved.
 
 import fs from 'fs';
@@ -7,7 +6,7 @@ import Crypto from "crypto";
 import ffmpegPath from "@ffmpeg-installer/ffmpeg";
 import ff from 'fluent-ffmpeg';
 import webp from "node-webpmux";
-import path "path";
+import path from "path";
 
 ff.setFfmpegPath(ffmpegPath);
 

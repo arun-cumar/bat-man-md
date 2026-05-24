@@ -110,4 +110,4 @@ const smsg = async (sock, m, store) => {
     return m
 }
 
-exports default smsg;
+export default smsg;

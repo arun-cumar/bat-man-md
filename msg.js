@@ -352,7 +352,7 @@ const pluginLoader = new PluginLoader();
                 const totalCommands = pluginLoader.getPluginCount();
 
                 const menuText = `
-╭══〘 `BAT-MAN `〙═⊷❍
+╭══〘``BAT-MAN``〙═⊷❍
 ┃${randomDesigns}╭─────────❍
 ┃${randomDesigns}│ 👑 *Owner:* ${config().owner}
 ┃${randomDesigns}│ 🧩 *Prefix:* [ . ]

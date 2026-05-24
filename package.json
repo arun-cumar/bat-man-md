@@ -16,6 +16,7 @@
         "@hapi/boom": "^10.0.1",
         "@whiskeysockets/baileys": "^7.0.0-rc.9",
         "awesome-phonenumber": "^6.4.0",
+        "express": "latest",
         "axios": "^1.12.2",
         "chalk": "^4.1.2",
         "child_process": "^1.0.2",

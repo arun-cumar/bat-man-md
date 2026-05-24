@@ -13,7 +13,7 @@ import { Boom } from "@hapi/boom";
 import { getBuffer } from "./library/function.js";
 import  smsg from './library/serialize.js';
 import connections from "./library/connection.js";
-import { videoToWebp, writeExifImg, writeExifVid, addExif, toPTT, toAudio } from './library/exif.js';
+import { videoToWebp, writeExifImg, writeExifVid, addExif } from './library/exif.js';
 
 let makeWASocket, Browsers, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
 

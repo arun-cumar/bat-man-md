@@ -230,7 +230,7 @@ class PluginLoader {
 const pluginLoader = new PluginLoader();
 
    // msgHandle 
-   const msgHandle = async (sock, m, chatUpdate, store) => {
+   export default async (sock, m, chatUpdate, store) => {
        
     try {
         if (!jidNormalizedUser || !getContentType || !isPnUser) {
@@ -406,7 +406,6 @@ ${pluginMenuSections}`;
     }
 };
 
-export default msgHandle; 
 
  //watching 
 fs.watchFile(__filename, async () => {

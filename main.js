@@ -19,7 +19,6 @@ import { videoToWebp, writeExifImg, writeExifVid, addExif } from './library/exif
 let makeWASocket, Browsers, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
 
 const loadBaileys = async () => {
-  
   makeWASocket = baileys.default;
   Browsers = baileys.Browsers;
   useMultiFileAuthState = baileys.useMultiFileAuthState;
@@ -35,19 +34,21 @@ const loadBaileys = async () => {
 const sessionPath = path.join(process.cwd(), "session");
 const credsPath = path.join(sessionPath, "creds.json"); 
 
-const question = (text) => {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    return new Promise((resolve) => {
-        rl.question(chalk.yellow(text), (answer) => {
-            resolve(answer);
-            rl.close();
-        });
-    });
-};
+  //SESSION 
+    const sessionData = (process.env.SESSION_ID ||  "").trim();
 
+    if (sessionData && !fs.existsSync(credsPath)) {
+        if (!fs.existsSync(sessionPath)) {
+            fs.mkdirSync(sessionPath, { recursive: true });
+        }
+
+        try {
+            fs.writeFileSync(credsPath, sessionData.trim());
+            console.log("✅ Session file restored from ENV");
+              } catch (err) {
+                   console.error("❌ Session restore failed:", err.message);
+                 }
+           };
 //server
     const app = express();
     const port = process.env.PORT || 3000;
@@ -65,33 +66,52 @@ const question = (text) => {
 🌐 Uptime server running on port ${port} `));
     });
 
-  //SESSION 
-    const sessionData = (process.env.SESSION_ID ||  "").trim();
+const question = (text) => {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+    return new Promise((resolve) => {
+        rl.question(chalk.yellow(text), (answer) => {
+            resolve(answer);
+            rl.close();
+        });
+    });
+};
 
-    if (sessionData && !fs.existsSync(credsPath)) {
-        if (!fs.existsSync(sessionPath)) {
-            fs.mkdirSync(sessionPath, { recursive: true });
-        }
-
-        try {
-            fs.writeFileSync(credsPath, sessionData.trim());
-            console.log("✅ Session file restored from ENV");
-              } catch (err) {
-                   console.error("❌ Session restore failed:", err.message);
-                 }
-           };
      
 const clientstart = async() => {
     await loadBaileys();
     
-    const browserOptions = [
-        Browsers.macOS('Safari'),
-        Browsers.macOS('Chrome'),
-        Browsers.windows('Firefox'),
-        Browsers.ubuntu('Chrome'),
-        Browsers.baileys('Baileys'),
-        Browsers.macOS('Edge'),
-        Browsers.windows('Edge'),
+ const browserOptions = [
+    Browsers.macOS('Safari'),
+    Browsers.macOS('Chrome'),
+    Browsers.macOS('Firefox'),
+    Browsers.macOS('Edge'),
+    Browsers.macOS('Opera'),
+    Browsers.macOS('Brave'),
+    Browsers.macOS('Vivaldi'),
+
+    Browsers.windows('Chrome'),
+    Browsers.windows('Firefox'),
+    Browsers.windows('Edge'),
+    Browsers.windows('Opera'),
+    Browsers.windows('Brave'),
+    Browsers.windows('Vivaldi'),
+    Browsers.windows('Safari'),
+
+    Browsers.ubuntu('Chrome'),
+    Browsers.ubuntu('Firefox'),
+    Browsers.ubuntu('Edge'),
+    Browsers.ubuntu('Opera'),
+    Browsers.ubuntu('Brave'),
+    Browsers.ubuntu('Vivaldi'),
+
+    Browsers.baileys('Baileys'),
+    Browsers.baileys('Chrome'),
+    Browsers.baileys('Firefox'),
+    Browsers.baileys('Edge'),
+    Browsers.baileys('Opera')
     ];
     
     const randomBrowser = browserOptions[Math.floor(Math.random() * browserOptions.length)];
@@ -344,7 +364,7 @@ const clientstart = async() => {
             buffer = Buffer.concat([buffer, chunk]);
         }
 
-        let type = await FileType.fromBuffer(buffer);
+        let type = await fileTypeFromBuffer(buffer);
         let trueFileName = attachExtension ? filename + "." + type.ext : filename;
         await fs.writeFileSync(trueFileName, buffer);
         
@@ -383,7 +403,7 @@ const clientstart = async() => {
               
         if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer');
         
-        const type = await FileType.fromBuffer(data) || {
+        const type = await fileTypeFromBuffer(data) || {
             mime: 'application/octet-stream',
             ext: '.bin'
         };

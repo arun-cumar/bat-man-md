@@ -4,7 +4,7 @@ process.on("uncaughtException", console.error);
 import config from './settings/config.js';
 import pino from "pino";
 import { fileTypeFromBuffer } from 'file-type';
-import { fileURLToPath } "url";
+import { fileURLToPath } from "url";
 import readline from "readline";
 import fs from "fs";
 import express from "express";

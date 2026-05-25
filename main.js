@@ -5,6 +5,7 @@ import config from './settings/config.js';
 import baileys from "@whiskeysockets/baileys";
 import pino from "pino";
 import { fileTypeFromBuffer } from 'file-type';
+import fileURLToPath from "url";
 import readline from "readline";
 import fs from "fs";
 import express from "express";
@@ -84,14 +85,7 @@ const clientstart = async() => {
     await loadBaileys();
     
  const browserOptions = [
-    Browsers.macOS('Safari'),
-    Browsers.macOS('Chrome'),
-    Browsers.macOS('Firefox'),
-    Browsers.macOS('Edge'),
-    Browsers.macOS('Opera'),
-    Browsers.macOS('Brave'),
-    Browsers.macOS('Vivaldi'),
-
+  
     Browsers.windows('Chrome'),
     Browsers.windows('Firefox'),
     Browsers.windows('Edge'),

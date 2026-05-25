@@ -2,10 +2,8 @@
 console.clear();
 process.on("uncaughtException", console.error);
 import config from './settings/config.js';
-import baileys from "@whiskeysockets/baileys";
 import pino from "pino";
 import { fileTypeFromBuffer } from 'file-type';
-import fileURLToPath from "url";
 import readline from "readline";
 import fs from "fs";
 import express from "express";
@@ -17,11 +15,11 @@ import  smsg from './library/serialize.js';
 import connections from "./library/connection.js";
 import { videoToWebp, writeExifImg, writeExifVid, addExif } from './library/exif.js';
 
-let makeWASocket, Browsers, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
+let makeWASocket,  makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
 
 const loadBaileys = async () => {
+const baileys = await import('@whiskeysockets/baileys');
   makeWASocket = baileys.default;
-  Browsers = baileys.Browsers;
   useMultiFileAuthState = baileys.useMultiFileAuthState;
   DisconnectReason = baileys.DisconnectReason;
   fetchLatestBaileysVersion = baileys.fetchLatestBaileysVersion;
@@ -84,32 +82,6 @@ const question = (text) => {
 const clientstart = async() => {
     await loadBaileys();
     
- const browserOptions = [
-  
-    Browsers.windows('Chrome'),
-    Browsers.windows('Firefox'),
-    Browsers.windows('Edge'),
-    Browsers.windows('Opera'),
-    Browsers.windows('Brave'),
-    Browsers.windows('Vivaldi'),
-    Browsers.windows('Safari'),
-
-    Browsers.ubuntu('Chrome'),
-    Browsers.ubuntu('Firefox'),
-    Browsers.ubuntu('Edge'),
-    Browsers.ubuntu('Opera'),
-    Browsers.ubuntu('Brave'),
-    Browsers.ubuntu('Vivaldi'),
-
-    Browsers.baileys('Baileys'),
-    Browsers.baileys('Chrome'),
-    Browsers.baileys('Firefox'),
-    Browsers.baileys('Edge'),
-    Browsers.baileys('Opera')
-    ];
-    
-    const randomBrowser = browserOptions[Math.floor(Math.random() * browserOptions.length)];
-    
     const store = {
         messages: new Map(),
         contacts: new Map(),
@@ -132,6 +104,11 @@ const clientstart = async() => {
     
     const { state, saveCreds } = await useMultiFileAuthState(`./${config().session}, sessionPath`);
     const { version, isLatest } = await fetchLatestBaileysVersion();
+    
+    const browserOptions = [ "Ubuntu", "Safari", "Firefox", "Chrome", "Brave", "Opera", "Vivaldi", "Edge"
+    ];
+    
+    const randomBrowser = browserOptions[Math.floor(Math.random() * browserOptions.length)];
     
    const sock = makeWASocket({
         version,
@@ -530,3 +507,4 @@ process.stderr.write = function (msg, encoding, fd) {
     if (typeof msg === 'string' && ignoredErrors.some(e => msg.includes(e))) return;
     originalStderrWrite.apply(process.stderr, arguments);
 };
+//😁

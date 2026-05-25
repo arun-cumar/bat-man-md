@@ -4,6 +4,7 @@ process.on("uncaughtException", console.error);
 import config from './settings/config.js';
 import pino from "pino";
 import { fileTypeFromBuffer } from 'file-type';
+import { fileURLToPath } "url";
 import readline from "readline";
 import fs from "fs";
 import express from "express";
@@ -116,7 +117,7 @@ const clientstart = async() => {
             creds: state.creds,
             keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "silent" })),
         },
-        printQRInTerminal: !config().status.terminal,
+        printQRInTerminal: !config.status.terminal,
         logger: pino({ level: "silent" }),
         browser: randomBrowser
     });

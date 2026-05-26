@@ -224,28 +224,28 @@ const clientstart = async() => {
 
     sock.ev.on('messages.upsert', async chatUpdate => {
         try {
-            const Msg = chatUpdate.messages[0];
-            if (!Msg.message) return;
+            const m = chatUpdate.messages[0];
+            if (!m.message) return;
             
-            Msg.message = Object.keys(Msg.message)[0] === 'ephemeralMessage' 
-                ? Msg.message.ephemeralMessage.message 
-                : Msg.message;
+            m.message = Object.keys(m.message)[0] === 'ephemeralMessage' 
+                ? m.message.ephemeralMessage.message 
+                : m.message;
             
-            if (config.status.autoReact && Msg.key && Msg.key.remoteJid === 'status@broadcast') {
+            if (config.status.autoReact && m.key && m.key.remoteJid === 'status@broadcast') {
                 let emoji = ['😘', '😭', '😂', '😹', '😍', '😋', '🙏', '😜', '😢', '😠', '🤫', '😎'];
              
                 let sigma = emoji[Math.floor(Math.random() * emoji.length)];
-                await sock.readMessages([Msg.key]);
+                await sock.readMessages([m.key]);
                 await sock.sendMessage('status@broadcast', { 
                     react: { 
                         text: sigma, 
-                        key: Msg.key 
+                        key: m.key 
                     }
-                }, { statusJidList: [Msg.key.participant] });
+                }, { statusJidList: [m.key.participant] });
             }
             
-            if (!sock.public && !Msg.key.fromMe && chatUpdate.type === 'notify') return;
-            if (Msg.key.id.startsWith('BASE-') && Msg.key.id.length === 12) return;
+            if (!sock.public && !m.key.fromMe && chatUpdate.type === 'notify') return;
+            if (m.key.id.startsWith('BASE-') && m.key.id.length === 12) return;
             
                  //serialize
                 await smsg(sock, m, store);

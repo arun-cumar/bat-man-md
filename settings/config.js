@@ -8,7 +8,7 @@ const config = {
     botNumber: "-",
     setPair: "BAT-MAN",
     thumbUrl: "https://i.imgur.com/IkEv97P.jpeg",
-    session: "sessions",
+    session: "",
     status: {
         public: true,
         terminal: true,

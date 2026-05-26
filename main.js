@@ -106,11 +106,6 @@ const clientstart = async() => {
     const { state, saveCreds } = await useMultiFileAuthState(`./${config.session}, sessionPath`);
     const { version, isLatest } = await fetchLatestBaileysVersion();
     
-    const browserOptions = [ "Ubuntu", "Safari", "Firefox", "Chrome", "Brave", "Opera", "Vivaldi", "Edge"
-    ];
-    
-    const randomBrowser = browserOptions[Math.floor(Math.random() * browserOptions.length)];
-    
    const sock = makeWASocket({
         version,
         auth: {
@@ -119,7 +114,7 @@ const clientstart = async() => {
         },
         printQRInTerminal: !config.status.terminal,
         logger: pino({ level: "silent" }),
-        browser: randomBrowser
+        browser: [ "Ubuntu", "Chrome", "20.0.04"]
     });
     
     if (config.status.terminal && !sock.authState.creds.registered) {

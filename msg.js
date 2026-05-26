@@ -402,7 +402,7 @@ ${pluginMenuSections}`;
             // No default case - stay silent for unknown commands
         }
     } catch (err) {
-        console.log(util.format(err));
+        console.log(format(err));
     }
 };
 

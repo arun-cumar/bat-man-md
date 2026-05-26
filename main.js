@@ -103,7 +103,7 @@ const clientstart = async() => {
         }
     };
     
-    const { state, saveCreds } = await useMultiFileAuthState(`./${config.session}, session`);
+    const { state, saveCreds } = await useMultiFileAuthState(`./${config.session}`);
     const { version, isLatest } = await fetchLatestBaileysVersion();
     
    const sock = makeWASocket({

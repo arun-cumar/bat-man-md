@@ -231,7 +231,7 @@ const clientstart = async() => {
                 ? Msg.message.ephemeralMessage.message 
                 : Msg.message;
             
-            if (config().status.autoReact && Msg.key && Msg.key.remoteJid === 'status@broadcast') {
+            if (config.status.autoReact && Msg.key && Msg.key.remoteJid === 'status@broadcast') {
                 let emoji = ['😘', '😭', '😂', '😹', '😍', '😋', '🙏', '😜', '😢', '😠', '🤫', '😎'];
              
                 let sigma = emoji[Math.floor(Math.random() * emoji.length)];

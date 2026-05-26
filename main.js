@@ -102,8 +102,9 @@ const clientstart = async() => {
             });
         }
     };
-    
-    const { state, saveCreds } = await useMultiFileAuthState(`./${config.session}`);
+
+    const { state, saveCreds } = await useMultiFileAuthState(config.session ? config.session : sessionPath);
+
     const { version, isLatest } = await fetchLatestBaileysVersion();
     
    const sock = makeWASocket({

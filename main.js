@@ -172,7 +172,7 @@ const clientstart = async() => {
             const botNumber = sock.user.id.split(':')[0] + '@s.whatsapp.net';
             sock.sendMessage(botNumber, {
                 text:
-                    `👑 *${config().settings.title}* is Online!\n\n` +
+                    `👑 *${config.settings.title}* is Online!\n\n` +
                     `> 📌 User: ${sock.user.name || 'Unknown'}\n` +
                     `> ⚡ Prefix: [ . ]\n` +
                     `> 🚀 Mode: ${sock.public ? 'Public' : 'Self'}\n` +

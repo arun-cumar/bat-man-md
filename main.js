@@ -184,9 +184,9 @@ const clientstart = async() => {
                     forwardingScore: 1,
                     isForwarded: true,
                     externalAdReply: {
-                        title: config().settings.title,
-                        body: config().settings.description,
-                        thumbnailUrl: config().thumbUrl,
+                        title: config.settings.title,
+                        body: config.settings.description,
+                        thumbnailUrl: config.thumbUrl,
                         sourceUrl: "https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24",
                         mediaType: 1,
                         renderLargerThumbnail: true

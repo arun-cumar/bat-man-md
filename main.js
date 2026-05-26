@@ -16,21 +16,6 @@ import  smsg from './library/serialize.js';
 import connections from "./library/connection.js";
 import { videoToWebp, writeExifImg, writeExifVid, addExif } from './library/exif.js';
 
-let makeWASocket,  makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
-
-const loadBaileys = async () => {
-const baileys = await import('@whiskeysockets/baileys');
-  makeWASocket = baileys.default;
-  useMultiFileAuthState = baileys.useMultiFileAuthState;
-  DisconnectReason = baileys.DisconnectReason;
-  fetchLatestBaileysVersion = baileys.fetchLatestBaileysVersion;
-  jidDecode = baileys.jidDecode;
-  downloadContentFromMessage = baileys.downloadContentFromMessage;
-  jidNormalizedUser = baileys.jidNormalizedUser;
-  isPnUser = baileys.isPnUser;
-  makeCacheableSignalKeyStore = baileys.makeCacheableSignalKeyStore;
-};
-
 const sessionPath = path.join(process.cwd(), "session");
 const credsPath = path.join(sessionPath, "creds.json"); 
 
@@ -77,6 +62,22 @@ const question = (text) => {
             rl.close();
         });
     });
+};
+
+let makeWASocket,  makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
+
+const loadBaileys = async () => {
+const baileys = await import('@whiskeysockets/baileys');
+  
+  makeWASocket = baileys.default;
+  useMultiFileAuthState = baileys.useMultiFileAuthState;
+  DisconnectReason = baileys.DisconnectReason;
+  fetchLatestBaileysVersion = baileys.fetchLatestBaileysVersion;
+  jidDecode = baileys.jidDecode;
+  downloadContentFromMessage = baileys.downloadContentFromMessage;
+  jidNormalizedUser = baileys.jidNormalizedUser;
+  isPnUser = baileys.isPnUser;
+  makeCacheableSignalKeyStore = baileys.makeCacheableSignalKeyStore;
 };
 
      
@@ -251,7 +252,7 @@ const clientstart = async() => {
                  //serialize
                 await smsg(sock, m, store);
                 //msg
-              const msgFile = (await import("./msg.js"));
+              const msgFile = await import("./msg.js");
                  msgFile.default(sock, m, chatUpdate, store);
                
         } catch (err) {

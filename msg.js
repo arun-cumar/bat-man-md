@@ -11,7 +11,7 @@ import { dechtml, fetchWithTimeout } from "./library/function.js";
 import tempfiles from "./library/upload.js";
 import fquoted  from './library/quoted.js';     
 import api from './library/api.js';
-import { fileURLToPath } from "url";
+import { fileURLToPath, format } from "url";
 
 const __filename = fileURLToPath(import.meta.url);   
 const image = fs.readFileSync('./media/image.jpg');
@@ -402,7 +402,7 @@ ${pluginMenuSections}`;
             // No default case - stay silent for unknown commands
         }
     } catch (err) {
-        console.log(require("util").format(err));
+        console.log(util.format(err));
     }
 };
 

@@ -251,7 +251,7 @@ const clientstart = async() => {
                  //serialize
                 await smsg(sock, m, store);
                 //msg
-              const msgFile = await import("./msg.js");
+              const msgFile = (await import("./msg.js"));
                  msgFile.default(sock, m, chatUpdate, store);
                
         } catch (err) {

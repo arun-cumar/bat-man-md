@@ -103,7 +103,7 @@ const clientstart = async() => {
         }
     };
 
-    const { state, saveCreds } = await useMultiFileAuthState(config.session ? config.session : sessionPath);
+    const { state, saveCreds } = await useMultiFileAuthState('session');
 
     const { version, isLatest } = await fetchLatestBaileysVersion();
     

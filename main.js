@@ -164,10 +164,11 @@ const clientstart = async() => {
     
     sock.ev.on('creds.update', saveCreds);
 
-     try{
+     try {
         connection(sock, clientstart, DisconnectReason, chalk, Boom); 
     } catch (error) {
            console.error(error);
+     }
                    
   sock.ev.on('messages.upsert', async chatUpdate => {
         try {

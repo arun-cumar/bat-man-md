@@ -495,23 +495,6 @@ const ignoredErrors = [
 ];
 
     
-const __filename = fileURLToPath(import.meta.url);
-const cacheBuster = `?update=${Date.now()}`;
-    
- //watching 
-fs.watchFile(__filename, async () => {
-    // temporary stop
-    fs.unwatchFile(__filename);
-    
-    console.log('\x1b[0;32m' + __filename + ' \x1b[1;32mupdated!\x1b[0m');
-    
-    try {
-        await import(`./${path.basename(__filename)}${cacheBuster}`);
-    } catch (error) {
-        console.error('\x1b[1;31mError re-loading file:\x1b[0m', error);
-    }
-});
-
 process.on('unhandledRejection', reason => {
     if (ignoredErrors.some(e => String(reason).includes(e))) return;
     console.log('Unhandled Rejection:', reason);

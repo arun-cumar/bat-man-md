@@ -163,72 +163,13 @@ const clientstart = async() => {
     };
     
     sock.ev.on('creds.update', saveCreds);
-    
-    sock.ev.on('connection.update', (update) => {
-        const { connection, lastDisconnect, qr } = update;
-        
-        if (connection === 'connecting') {
-            console.log(chalk.yellow('🔄 Connecting to WhatsApp...'));
-        }
-        
-        if (connection === 'open') {
-            console.log(chalk.green('✅ Connected to WhatsApp successfully!'));
-            
-            // Send connection success message to the bot owner
-            const botNumber = sock.user.id.split(':')[0] + '@s.whatsapp.net';
-            sock.sendMessage(botNumber, {
-                text:
-                    `👑 *${config.settings.title}* is Online!\n\n` +
-                    `> 📌 User: ${sock.user.name || 'Unknown'}\n` +
-                    `> ⚡ Prefix: [ . ]\n` +
-                    `> 🚀 Mode: ${sock.public ? 'Public' : 'Self'}\n` +
-                    `> 🤖 Version: v2.0\n` +
-                    `> 👑 Owner: arun°•Cumar\n\n` +
-                    `*✅ Bot connected successfully*\n` +
-                    `📢 Join our channel: https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24`,
-                contextInfo: {
-                    forwardingScore: 1,
-                    isForwarded: true,
-                    externalAdReply: {
-                        title: config.settings.title,
-                        body: config.settings.description,
-                        thumbnailUrl: config.thumbUrl,
-                        sourceUrl: "https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24",
-                        mediaType: 1,
-                        renderLargerThumbnail: true
-                    }
-                }
-            }).catch(console.error);
-        }
-        
-        if (connection === 'close') {
-            const statusCode = lastDisconnect?.error?.output?.statusCode;
-            const shouldReconnect = statusCode !== DisconnectReason.loggedOut;
-            
-            console.log(chalk.red('❌ Connection closed:'), lastDisconnect?.error);
-            
-            if (shouldReconnect) {
-                console.log(chalk.yellow('🔄 Attempting to reconnect...'));
-                setTimeout(clientstart, 5000);
-            } else {
-                console.log(chalk.red('🚫 Logged out, please restart the bot.'));
-            }
-        }
-        
-        if (qr) {
-            console.log(chalk.blue('📱 Scan the QR code above to connect.'));
-        }
-        
-        connections({
-            sock, 
-            update, 
-            clientstart, 
-            DisconnectReason, 
-            Boom
-        });
-    });
 
-    sock.ev.on('messages.upsert', async chatUpdate => {
+     try{
+        connection(sock, clientstart, DisconnectReason, chalk, Boom); 
+    } catch (error) {
+           console.error(error);
+                   
+  sock.ev.on('messages.upsert', async chatUpdate => {
         try {
             const m = chatUpdate.messages[0];
             if (!m.message) return;

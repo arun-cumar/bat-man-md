@@ -2,7 +2,7 @@
 
 let isRestarting = false;
 
-const connection = async (sock,  clientstart, DisconnectReason, Boom) => {
+const connection = async (sock,  clientstart, DisconnectReason, chalk, Boom) => {
 
     sock.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect, qr } = update;

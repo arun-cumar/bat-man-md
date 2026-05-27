@@ -2,10 +2,10 @@
 
 let isRestarting = false;
 
-const connection = async (sock, startBot, saveCreds, DisconnectReason, clientstart) => {
+const connection = async (sock,  clientstart, DisconnectReason, Boom) => {
 
     sock.ev.on('connection.update', async (update) => {
-        const { connection, lastDisconnect } = update;
+        const { connection, lastDisconnect, qr } = update;
 
         try {
 
@@ -50,15 +50,15 @@ const connection = async (sock, startBot, saveCreds, DisconnectReason, clientsta
                     
             // 🔴 CONNECTION CLOSED
             if (connection === 'close') {
-                const reason =
-                    lastDisconnect?.error?.output?.statusCode ||
-                    lastDisconnect?.error?.code;
+                
+                let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
 
                 console.log(chalk.red(`❌ Connection Closed. Reason: ${reason}`));
 
-                // 🔥 Reset flags
-                activeSent = false;
-
+                if (qr) {
+                   console.log(chalk.blue('📱 Scan the QR code above to connect.'));
+              }
+          
                 // 🚫 Logged out → stop bot
                 if (reason === DisconnectReason.loggedOut) {
                     console.log(chalk.yellow("🚫 Logged out! Please delete session and scan again."));

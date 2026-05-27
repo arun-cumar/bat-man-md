@@ -15,8 +15,7 @@ import { getBuffer } from "./library/function.js";
 import  smsg from './library/serialize.js';
 import connections from "./library/connection.js";
 import { videoToWebp, writeExifImg, writeExifVid, addExif } from './library/exif.js';
-import {
-        makeWASocket,
+import { makeWASocket,
         useMultiFileAuthState,
         DisconnectReason,
         fetchLatestBaileysVersion,
@@ -24,8 +23,7 @@ import {
         downloadContentFromMessage,
         jidNormalizedUser,
         makeCacheableSignalKeyStore,
-        isPnUser
-       } from "@wisckeysocket/baileys";
+        isPnUser } from "@whiskeysockets/baileys";
 
 const sessionPath = path.join(process.cwd(), "session");
 const credsPath = path.join(sessionPath, "creds.json"); 

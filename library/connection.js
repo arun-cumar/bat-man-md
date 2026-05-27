@@ -1,40 +1,105 @@
 // © 2026 arun•°Cumar. All Rights Reserved.
 
-import chalk from "chalk";
+let isRestarting = false;
 
-    const connections = ({ sock, update, clientstart, DisconnectReason, Boom }) => {
+const connection = async (sock, startBot, saveCreds, DisconnectReason, clientstart) => {
+
+    sock.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect } = update;
-        if (connection === 'close') {
-            let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
-            if (reason === DisconnectReason.badSession) {
-                console.log(chalk.bold.red(`bad session file, please delete session and scan again`))
-                process.exit();
-            } else if (reason === DisconnectReason.connectionClosed) {
-                console.log(chalk.bold.red("connection closed, reconnecting...."))
-                clientstart();
-            } else if (reason === DisconnectReason.connectionLost) {
-                console.log(chalk.bold.red("connection lost from server, reconnecting..."))
-                clientstart();
-            } else if (reason === DisconnectReason.connectionReplaced) {
-                console.log(chalk.bold.red("connection replaced, another new session opened, please restart bot"))
-                process.exit();
-            } else if (reason === DisconnectReason.loggedOut) {
-                console.log(chalk.bold.red(`device loggedout, please delete folder session and scan again.`))
-                process.exit();
-            } else if (reason === DisconnectReason.restartRequired) {
-                console.log(chalk.bold.red("restart required, restarting..."))
-                clientstart();
-            } else if (reason === DisconnectReason.timedOut) {
-                console.log(chalk.bold.red("connection timedout, reconnecting..."))
-                clientstart();
-            } else {
-                console.log(chalk.bold.red(`unknown disconnectReason: ${reason}|${connection}`))
+
+        try {
+
+            // 🟡 CONNECTING
+            if (connection === 'connecting') {
+                console.log(chalk.yellow("⏳ Connecting to WhatsApp..."));
+            }
+
+            // 🟢 CONNECTED
+            if (connection === 'open') {
+                console.log(chalk.green('✅ Connected to WhatsApp successfully!'));
+
+                // ✅ Reset flags on successful connection
+                isRestarting = false;
+
+                const botNumber = sock.user.id.split(':')[0] + '@s.whatsapp.net';
+
+                    sock.sendMessage(botNumber, {
+                text:
+                    `👑 *${config.settings.title}* is Online!\n\n` +
+                    `> 📌 User: ${sock.user.name || 'Unknown'}\n` +
+                    `> ⚡ Prefix: [ . ]\n` +
+                    `> 🚀 Mode: ${sock.public ? 'Public' : 'Self'}\n` +
+                    `> 🤖 Version: v2.0\n` +
+                    `> 👑 Owner: arun°•Cumar\n\n` +
+                    `*✅ Bot connected successfully*\n` +
+                    `📢 Join our channel: https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24`,
+                contextInfo: {
+                    forwardingScore: 1,
+                    isForwarded: true,
+                    externalAdReply: {
+                        title: config.settings.title,
+                        body: config.settings.description,
+                        thumbnailUrl: config.thumbUrl,
+                        sourceUrl: "https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24",
+                        mediaType: 1,
+                        renderLargerThumbnail: true
+                    }
+                }
+            }).catch(console.error);
+          }           
+                    
+            // 🔴 CONNECTION CLOSED
+            if (connection === 'close') {
+                const reason =
+                    lastDisconnect?.error?.output?.statusCode ||
+                    lastDisconnect?.error?.code;
+
+                console.log(chalk.red(`❌ Connection Closed. Reason: ${reason}`));
+
+                // 🔥 Reset flags
+                activeSent = false;
+
+                // 🚫 Logged out → stop bot
+                if (reason === DisconnectReason.loggedOut) {
+                    console.log(chalk.yellow("🚫 Logged out! Please delete session and scan again."));
+                    return;
+                }
+
+                // ⚠️ Prevent multiple restart spam
+                if (isRestarting) return;
+                isRestarting = true;
+
+                // 🧠 Smart reconnect delay based on reason
+                let delayTime = 2000;
+
+                if (reason === DisconnectReason.restartRequired) {
+                    delayTime = 3000;
+                } else if (reason === DisconnectReason.timedOut) {
+                    delayTime = 4000;
+                }
+
+                console.log(chalk.yellow(`🔁 Reconnecting in ${delayTime / 1000}s...`));
+
+                if (reason === 401) { // Unauthorized
+                console.log(chalk.red("❌ Session Expired! Please scan again."));
+                 return;
+            }
+                await delay(delayTime);
+
+                // 🔁 Restart connection
                 clientstart();
             }
-        } else if (connection === "open") {
-            console.log(chalk.bold.green('successfully connected to bot'))
-        }
-    }
-              
 
-export default connections;
+        } catch (err) {
+            console.log(chal.red("❌ Connection Handler Error:", err.message));
+        }
+    });
+}
+
+// ✅ Delay helper
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export default connection;
+

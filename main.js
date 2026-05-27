@@ -15,6 +15,17 @@ import { getBuffer } from "./library/function.js";
 import  smsg from './library/serialize.js';
 import connections from "./library/connection.js";
 import { videoToWebp, writeExifImg, writeExifVid, addExif } from './library/exif.js';
+import {
+        makeWASocket,
+        useMultiFileAuthState,
+        DisconnectReason,
+        fetchLatestBaileysVersion,
+        jidDecode,
+        downloadContentFromMessage,
+        jidNormalizedUser,
+        makeCacheableSignalKeyStore,
+        isPnUser
+       } from "@wisckeysocket/baileys";
 
 const sessionPath = path.join(process.cwd(), "session");
 const credsPath = path.join(sessionPath, "creds.json"); 
@@ -43,10 +54,10 @@ const credsPath = path.join(sessionPath, "creds.json");
     app.listen(port, () => {
         console.log(chalk.green.bold(`
 ╔═════════════════════╗
-○            BAT-MAN MD 
-○              🦇 V2.0     
+○       BAT-MAN MD 
+○        🦇 V2.0     
 ╠═════════════════════╣
-⊙     Developer by arun•°Cumar
+⊙ Developer by arun•°Cumar
 ╚═════════════════════╝
 🌐 Uptime server running on port ${port} `));
     });
@@ -64,25 +75,7 @@ const question = (text) => {
     });
 };
 
-let makeWASocket,  makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, jidDecode, downloadContentFromMessage, jidNormalizedUser, isPnUser;
-
-const loadBaileys = async () => {
-const baileys = await import('@whiskeysockets/baileys');
-  
-  makeWASocket = baileys.default;
-  useMultiFileAuthState = baileys.useMultiFileAuthState;
-  DisconnectReason = baileys.DisconnectReason;
-  fetchLatestBaileysVersion = baileys.fetchLatestBaileysVersion;
-  jidDecode = baileys.jidDecode;
-  downloadContentFromMessage = baileys.downloadContentFromMessage;
-  jidNormalizedUser = baileys.jidNormalizedUser;
-  isPnUser = baileys.isPnUser;
-  makeCacheableSignalKeyStore = baileys.makeCacheableSignalKeyStore;
-};
-
-     
 const clientstart = async() => {
-    await loadBaileys();
     
     const store = {
         messages: new Map(),

@@ -20,6 +20,7 @@ import { makeWASocket,
         DisconnectReason,
         fetchLatestBaileysVersion,
         jidDecode,
+        Browsers, 
         downloadContentFromMessage,
         jidNormalizedUser,
         makeCacheableSignalKeyStore,
@@ -74,7 +75,19 @@ const question = (text) => {
 };
 
 const clientstart = async() => {
+
+        const browserOptions = [
+        Browsers.macOS('Safari'),
+        Browsers.macOS('Chrome'),
+        Browsers.windows('Firefox'),
+        Browsers.ubuntu('Chrome'),
+        Browsers.baileys('Baileys'),
+        Browsers.macOS('Edge'),
+        Browsers.windows('Edge'),
+    ];
     
+    const randomBrowser = browserOptions[Math.floor(Math.random() * browserOptions.length)];
+   
     const store = {
         messages: new Map(),
         contacts: new Map(),
@@ -107,7 +120,7 @@ const clientstart = async() => {
         },
         printQRInTerminal: !config.status.terminal,
         logger: pino({ level: "silent" }),
-        browser: ['Batman-MD', 'Safari', '1.0.0'] 
+        browser: randomBrowser 
     });
     
     if (config.status.terminal && !sock.authState.creds.registered) {

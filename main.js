@@ -422,34 +422,7 @@ const clientstart = async() => {
     
     return sock;
 };
-
 clientstart();
 
-const ignoredErrors = [
-    'Socket connection timeout',
-    'EKEYTYPE',
-    'item-not-found',
-    'rate-overlimit',
-    'Connection Closed',
-    'Timed Out',
-    'Value not found'
-];
 
-    
-process.on('unhandledRejection', reason => {
-    if (ignoredErrors.some(e => String(reason).includes(e))) return;
-    console.log('Unhandled Rejection:', reason);
-});
-
-const originalConsoleError = console.error;
-console.error = function (msg, ...args) {
-    if (typeof msg === 'string' && ignoredErrors.some(e => msg.includes(e))) return;
-    originalConsoleError.apply(console, [msg, ...args]);
-};
-
-const originalStderrWrite = process.stderr.write;
-process.stderr.write = function (msg, encoding, fd) {
-    if (typeof msg === 'string' && ignoredErrors.some(e => msg.includes(e))) return;
-    originalStderrWrite.apply(process.stderr, arguments);
-};
 //😁

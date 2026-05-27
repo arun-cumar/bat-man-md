@@ -107,7 +107,7 @@ const clientstart = async() => {
         },
         printQRInTerminal: !config.status.terminal,
         logger: pino({ level: "silent" }),
-        browser: [ "Ubuntu", "Chrome", "20.0.04"]
+        browser: ['Batman-MD', 'Safari', '1.0.0'] 
     });
     
     if (config.status.terminal && !sock.authState.creds.registered) {

@@ -26,7 +26,7 @@ const config = {
         wait: '_Please wait..._'
     },
     settings: {
-        title: "_BAT-MAN WhatsApp Bot_",
+        title: "BAT-MAN WhatsApp Bot",
         packname: 'BAT-MAN',
         description: "this script was created by arun•°Cumar",
         author: 'https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24',

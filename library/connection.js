@@ -19,7 +19,7 @@ const connection = async (sock,  clientstart, DisconnectReason, chalk, Boom) => 
                 console.log(chalk.red(`❌ Connection Closed. Reason: ${reason}`));
 
                 // 🚫 Logged out → stop bot               
-            if (reason !=== DisconnectReason.loggedOut) {
+            if (reason !== DisconnectReason.loggedOut) {
                   clientstart();
                      console.log(chalk.yellow('🔄 Attempting to reconnect...'));    
              } else {

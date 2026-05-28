@@ -59,16 +59,14 @@ const connection = async (sock,  clientstart, DisconnectReason, chalk, Boom) => 
                    console.log(chalk.blue('📱 Scan the QR code above to connect.'));
               }
           
-                // 🚫 Logged out → stop bot
-                if (reason === DisconnectReason.loggedOut) {
-                    console.log(chalk.yellow("🚫 Logged out! Please delete session and scan again."));
-                    return;
-                }
-
-                // ⚠️ Prevent multiple restart spam
-                if (isRestarting) return;
-                isRestarting = true;
-
+                // 🚫 Logged out → stop bot               
+            if (reason === DisconnectReason.loggedOut) {
+                console.log(chalk.yellow('🔄 Attempting to reconnect...'));
+                setTimeout(clientstart, 6000);
+             } else {
+                console.log(chalk.red('🚫 Logged out, please restart the bot.'));
+               }
+           
                 // 🧠 Smart reconnect delay based on reason
                 let delayTime = 2000;
 

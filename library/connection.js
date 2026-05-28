@@ -1,19 +1,49 @@
 // © 2026 arun•°Cumar. All Rights Reserved.
 
-let isRestarting = false;
-
 const connection = async (sock,  clientstart, DisconnectReason, chalk, Boom) => {
 
     sock.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect, qr } = update;
 
         try {
-
             // 🟡 CONNECTING
             if (connection === 'connecting') {
                 console.log(chalk.yellow("⏳ Connecting to WhatsApp..."));
             }
+            
+           // 🔴 CONNECTION CLOSED
+            if (connection === 'close') {
+                
+                let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
 
+                console.log(chalk.red(`❌ Connection Closed. Reason: ${reason}`));
+
+                // 🚫 Logged out → stop bot               
+            if (reason !=== DisconnectReason.loggedOut) {
+                  clientstart();
+                     console.log(chalk.yellow('🔄 Attempting to reconnect...'));    
+             } else {
+                console.log(chalk.red('🚫 Logged out, please restart the bot.'));
+               }
+           
+                // 🧠 Smart reconnect delay based on reason
+                let delayTime = 2000;
+
+                if (reason === DisconnectReason.restartRequired) {
+                    delayTime = 3000;
+                 } else if (reason === DisconnectReason.timedOut) {
+                    delayTime = 4000;
+                }
+
+                console.log(chalk.yellow(`🔁 Reconnecting in ${delayTime / 1000}s...`));
+
+                if (reason === 401) { // Unauthorized
+                console.log(chalk.red("❌ Session Expired! Please scan again."));
+                 return;
+            }
+                await delay(delayTime);
+            }
+            
             // 🟢 CONNECTED
             if (connection === 'open') {
                 console.log(chalk.green('✅ Connected to WhatsApp successfully!'));
@@ -47,47 +77,6 @@ const connection = async (sock,  clientstart, DisconnectReason, chalk, Boom) => 
                 }
             }).catch(console.error);
           }           
-                    
-            // 🔴 CONNECTION CLOSED
-            if (connection === 'close') {
-                
-                let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
-
-                console.log(chalk.red(`❌ Connection Closed. Reason: ${reason}`));
-
-                if (qr) {
-                   console.log(chalk.blue('📱 Scan the QR code above to connect.'));
-              }
-          
-                // 🚫 Logged out → stop bot               
-            if (reason === DisconnectReason.loggedOut) {
-                console.log(chalk.yellow('🔄 Attempting to reconnect...'));
-                setTimeout(clientstart, 6000);
-             } else {
-                console.log(chalk.red('🚫 Logged out, please restart the bot.'));
-               }
-           
-                // 🧠 Smart reconnect delay based on reason
-                let delayTime = 2000;
-
-                if (reason === DisconnectReason.restartRequired) {
-                    delayTime = 3000;
-                } else if (reason === DisconnectReason.timedOut) {
-                    delayTime = 4000;
-                }
-
-                console.log(chalk.yellow(`🔁 Reconnecting in ${delayTime / 1000}s...`));
-
-                if (reason === 401) { // Unauthorized
-                console.log(chalk.red("❌ Session Expired! Please scan again."));
-                 return;
-            }
-                await delay(delayTime);
-
-                // 🔁 Restart connection
-                clientstart();
-            }
-
         } catch (err) {
             console.log(chal.red("❌ Connection Handler Error:", err.message));
         }

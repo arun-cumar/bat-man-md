@@ -13,7 +13,6 @@ import path from "path";
 import { Boom } from "@hapi/boom";
 import { getBuffer } from "./library/function.js";
 import  smsg from './library/serialize.js';
-import connection from "./library/connection.js";
 import { videoToWebp, writeExifImg, writeExifVid, addExif } from './library/exif.js';
 import { makeWASocket,
         useMultiFileAuthState,

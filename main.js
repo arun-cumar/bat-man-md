@@ -199,8 +199,7 @@ const clientstart = async() => {
         } catch (err) {
             console.log(chalk.red("❌ Connection Handler Error:", err.message));
            }
-       });     
-    
+           
          if (connection === 'close') {
             const statusCode = lastDisconnect?.error?.output?.statusCode;
             const shouldReconnect = statusCode !== DisconnectReason.loggedOut;
@@ -217,6 +216,7 @@ const clientstart = async() => {
                 console.log(chalk.red('🚫 Logged out, please restart the bot.'));
             }
         }
+    });
                         
   sock.ev.on('messages.upsert', async chatUpdate => {
         try {

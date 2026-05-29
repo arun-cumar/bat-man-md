@@ -164,11 +164,23 @@ const clientstart = async() => {
     
     sock.ev.on('creds.update', saveCreds);
 
-     try {
-        connection(sock, clientstart, DisconnectReason, chalk, Boom); 
-    } catch (error) {
-           console.error(error);
-     }
+         if (connection === 'close') {
+            const statusCode = lastDisconnect?.error?.output?.statusCode;
+            const shouldReconnect = statusCode !== DisconnectReason.loggedOut;
+            
+            console.log(chalk.red('❌ Connection closed:'), lastDisconnect?.error);
+            
+            if (shouldReconnect) {
+                console.log(chalk.yellow('🔄 Attempting to reconnect...'));
+                setTimeout(clientstart, 5000);
+            } else {
+                console.log(chalk.red('🚫 Logged out, please restart the bot.'));
+            }
+        }
+        
+        if (qr) {
+            console.log(chalk.blue('📱 Scan the QR code above to connect.'));
+        }
                    
   sock.ev.on('messages.upsert', async chatUpdate => {
         try {

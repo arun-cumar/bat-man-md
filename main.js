@@ -192,14 +192,14 @@ const clientstart = async() => {
                         sourceUrl: "https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24",
                         mediaType: 1,
                         renderLargerThumbnail: true
-                    }
-                }
-            });
-                }       
+                      }
+                   }
+               });
+           }       
         } catch (err) {
             console.log(chalk.red("❌ Connection Handler Error:", err.message));
            }
-       }     
+       });     
     
          if (connection === 'close') {
             const statusCode = lastDisconnect?.error?.output?.statusCode;

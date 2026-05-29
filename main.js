@@ -163,8 +163,11 @@ const clientstart = async() => {
     };
     
     sock.ev.on('creds.update', saveCreds);
-
-        // 🟢 CONNECTED
+    sock.ev.on('connection.update', async (update) => {
+        const { connection, lastDisconnect, qr } = update;
+        
+            // 🟢 CONNECTED
+         try {
             if (connection === 'open') {
                 console.log(chalk.green('✅ Connected to WhatsApp successfully!'));
 
@@ -196,9 +199,8 @@ const clientstart = async() => {
           }           
         } catch (err) {
             console.log(chalk.red("❌ Connection Handler Error:", err.message));
-        }
-    });
-}
+         }
+    
          if (connection === 'close') {
             const statusCode = lastDisconnect?.error?.output?.statusCode;
             const shouldReconnect = statusCode !== DisconnectReason.loggedOut;

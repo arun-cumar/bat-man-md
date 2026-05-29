@@ -1,6 +1,6 @@
 // © 2026 arun•°Cumar. All Rights Reserved.
 
-const connection = async (sock,  clientstart, DisconnectReason, chalk, Boom) => {
+const connection = async (sock, qr, clientstart, connection, DisconnectReason, chalk, Boom) => {
 
     sock.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect, qr } = update;
@@ -36,7 +36,11 @@ const connection = async (sock,  clientstart, DisconnectReason, chalk, Boom) => 
                 }
 
                 console.log(chalk.yellow(`🔁 Reconnecting in ${delayTime / 1000}s...`));
-
+        
+               if (qr) {
+                  console.log(chalk.blue('📱 Scan the QR code above to connect.'));
+               }
+        
                 if (reason === 401) { // Unauthorized
                 console.log(chalk.red("❌ Session Expired! Please scan again."));
                  return;
@@ -47,9 +51,6 @@ const connection = async (sock,  clientstart, DisconnectReason, chalk, Boom) => 
             // 🟢 CONNECTED
             if (connection === 'open') {
                 console.log(chalk.green('✅ Connected to WhatsApp successfully!'));
-
-                // ✅ Reset flags on successful connection
-                isRestarting = false;
 
                 const botNumber = sock.user.id.split(':')[0] + '@s.whatsapp.net';
 

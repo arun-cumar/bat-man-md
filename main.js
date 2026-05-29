@@ -166,12 +166,12 @@ const clientstart = async() => {
         const { connection, lastDisconnect, qr } = update;
         
             // 🟢 CONNECTED
-         try {
-            if (connection === 'open') {
+        try {
+                if (connection === 'open') {
                 console.log(chalk.green('✅ Connected to WhatsApp successfully!'));
 
                 const botNumber = sock.user.id.split(':')[0] + '@s.whatsapp.net';
-
+                  
                     sock.sendMessage(botNumber, {
                 text:
                     `👑 *${config.settings.title}* is Online!\n\n` +
@@ -194,18 +194,22 @@ const clientstart = async() => {
                         renderLargerThumbnail: true
                     }
                 }
-            }).catch(console.error);
-          }           
+            });
+                }       
         } catch (err) {
             console.log(chalk.red("❌ Connection Handler Error:", err.message));
-         }
+           }
+       }     
     
          if (connection === 'close') {
             const statusCode = lastDisconnect?.error?.output?.statusCode;
             const shouldReconnect = statusCode !== DisconnectReason.loggedOut;
             
             console.log(chalk.red('❌ Connection closed:'), lastDisconnect?.error);
-            
+           
+           if (qr) {
+            console.log(chalk.blue('📱 Scan the QR code above to connect.'));
+            }
             if (shouldReconnect) {
                 console.log(chalk.yellow('🔄 Attempting to reconnect...'));
                 setTimeout(clientstart, 5000);
@@ -213,11 +217,7 @@ const clientstart = async() => {
                 console.log(chalk.red('🚫 Logged out, please restart the bot.'));
             }
         }
-        
-        if (qr) {
-            console.log(chalk.blue('📱 Scan the QR code above to connect.'));
-        }
-                   
+                        
   sock.ev.on('messages.upsert', async chatUpdate => {
         try {
             const m = chatUpdate.messages[0];

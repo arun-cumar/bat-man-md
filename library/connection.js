@@ -78,7 +78,7 @@ const connection = async (sock,  clientstart, DisconnectReason, chalk, Boom) => 
             }).catch(console.error);
           }           
         } catch (err) {
-            console.log(chal.red("❌ Connection Handler Error:", err.message));
+            console.log(chalk.red("❌ Connection Handler Error:", err.message));
         }
     });
 }

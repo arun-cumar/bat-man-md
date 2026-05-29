@@ -164,6 +164,41 @@ const clientstart = async() => {
     
     sock.ev.on('creds.update', saveCreds);
 
+        // 🟢 CONNECTED
+            if (connection === 'open') {
+                console.log(chalk.green('✅ Connected to WhatsApp successfully!'));
+
+                const botNumber = sock.user.id.split(':')[0] + '@s.whatsapp.net';
+
+                    sock.sendMessage(botNumber, {
+                text:
+                    `👑 *${config.settings.title}* is Online!\n\n` +
+                    `> 📌 User: ${sock.user.name || 'Unknown'}\n` +
+                    `> ⚡ Prefix: [ . ]\n` +
+                    `> 🚀 Mode: ${sock.public ? 'Public' : 'Self'}\n` +
+                    `> 🤖 Version: v2.0\n` +
+                    `> 👑 Owner: arun°•Cumar\n\n` +
+                    `*✅ Bot connected successfully*\n` +
+                    `📢 Join our channel: https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24`,
+                contextInfo: {
+                    forwardingScore: 1,
+                    isForwarded: true,
+                    externalAdReply: {
+                        title: config.settings.title,
+                        body: config.settings.description,
+                        thumbnailUrl: config.thumbUrl,
+                        sourceUrl: "https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24",
+                        mediaType: 1,
+                        renderLargerThumbnail: true
+                    }
+                }
+            }).catch(console.error);
+          }           
+        } catch (err) {
+            console.log(chalk.red("❌ Connection Handler Error:", err.message));
+        }
+    });
+}
          if (connection === 'close') {
             const statusCode = lastDisconnect?.error?.output?.statusCode;
             const shouldReconnect = statusCode !== DisconnectReason.loggedOut;

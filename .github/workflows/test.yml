@@ -19,6 +19,6 @@ jobs:
         cache: 'npm'
 
     - name: Install Dependencies
-      run: npm install 
+      run: yarn install 
     - name: Run Syntax & Build Test
       run: node --check asura.js 

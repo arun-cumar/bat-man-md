@@ -1,14 +1,11 @@
-{
-  "name": "Bat-man",
+{"name": "Bat-man",
   "version": "v2.0",
   "description": "Advanced WhatsApp Bot powered by Baileys",
   "main": "main.js",
   "type": "module",
   "author": "arun•°Cumar",
   "license": "MIT",
-  "scripts": {
-    "start": "node main.js"    
-    },
+  "scripts": {"start": "node main.js"},
     "dependencies": {
         "@adiwajshing/keyed-db": "^0.2.4",
         "@colors/colors": "^1.5.0",
@@ -42,14 +39,4 @@
         "stream": "^0.0.3",
         "util": "^0.12.4",
         "vm": "latest",
-        "yt-search": "^2.12.1"      
-    },
-     "devDependencies": {
-     "eslint": "^9.0.0",
-     "nodemon": "^3.1.0",
-     "prettier": "^3.2.0"
-   },
-    "engines": {
-     "node": ">=20.0.0"
-   }
-}
+        "yt-search": "^2.12.1"}}

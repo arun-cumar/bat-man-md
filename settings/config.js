@@ -1,4 +1,7 @@
 //  2025 arun•°Cumar. All Rights Reserved.
+import fs from "fs"
+import path from "path"
+import { fileURLToPath} "url"
 
 const config = {
     owner: "arun•°Cumar",
@@ -49,7 +52,7 @@ const __filename = fileURLToPath(import.meta.url);
 const cacheBuster = `?update=${Date.now()}`;
     
  //watching 
-fs.watchFile(__filename, async (fs,path,url) => {
+fs.watchFile(__filename, async () => {
     // temporary stop
     fs.unwatchFile(__filename);
     

@@ -1,4 +1,4 @@
-import config from "../settings/config";
+import config from "../settings/config.js";
 import os from "os";
 
 function runtime(seconds) {

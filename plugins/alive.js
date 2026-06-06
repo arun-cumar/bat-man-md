@@ -10,7 +10,7 @@ function runtime(seconds) {
     return `${d}d ${h}h ${m}m ${s}s`;
 }
 
-   const alive = {
+ export default {
     command: 'alive',
     description: 'Check system status and bot info',
     category: 'general',
@@ -147,4 +147,4 @@ ${config.settings.footer}`];
     }
 };
 
-export default alive;
+

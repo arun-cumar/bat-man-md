@@ -56,7 +56,7 @@ function runtime(seconds) {
             const cpu = os.cpus()[0].model;
             const host = os.platform();
             
-            const aliveMessage = 
+            const aliveMessage = [
 `✨ *${config.settings.title} is Watching Over You* ✨
 
 ╔═══════════════════
@@ -113,7 +113,7 @@ https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24`,
 🔗 **OFFICIAL CHANNEL**:
 https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24
 
-${config.settings.footer}`;
+${config.settings.footer}`];
 
  const finalAlive = aliveMessage[Math.floor(Math.random() * aliveMessage.length)];
     

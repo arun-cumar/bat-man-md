@@ -90,7 +90,7 @@ class PluginLoader {
               
               try {
                     const pluginPath = path.join(this.pluginsDir, file);
-                    const plugin = import(pluginPath);
+                    const plugin = await import(pluginPath);
                     
                     if (plugin.command && typeof plugin.execute === 'function') {
                         // Set default category if not provided

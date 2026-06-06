@@ -367,7 +367,7 @@ const pluginLoader = new PluginLoader();
 ┃${randomDesigns}╰─────────❍
 ╰══════════⊷❍
 𝑠ɪᴍᴘʟᴇ ᴡᴀʙᴏᴛ ᴍᴀᴅᴇ ʙʏ 𝑎𝑟𝑢𝑛.𝑐𝑢𝑚𝑎𝑟 ヅ
-> 📢 Join our channel: https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24`;
+> 📢 Join our channel: https://whatsapp.com/channel/0029VbB59W9GehENxhoI5l24
 
 ${pluginMenuSections}`;
 

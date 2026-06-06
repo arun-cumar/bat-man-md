@@ -1,4 +1,4 @@
-   const ping = {
+export default {
     command: 'ping',
     description: 'Check bot response time',
     category: 'general',
@@ -33,4 +33,4 @@
     }
 };
 
-export default ping;
+

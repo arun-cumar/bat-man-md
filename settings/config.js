@@ -1,11 +1,8 @@
 //  2025 arun•°Cumar. All Rights Reserved.
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
 
 const config = {
     owner: "arun•°Cumar",
-    botNumber: "-",
+    botNumber: "917510952485",
     setPair: "BAT-MAN",
     thumbUrl: "https://i.imgur.com/IkEv97P.jpeg",
     status: {
@@ -52,7 +49,7 @@ const __filename = fileURLToPath(import.meta.url);
 const cacheBuster = `?update=${Date.now()}`;
     
  //watching 
-fs.watchFile(__filename, async () => {
+fs.watchFile(__filename, async (fs,path,url) => {
     // temporary stop
     fs.unwatchFile(__filename);
     

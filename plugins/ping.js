@@ -1,4 +1,4 @@
-export default {
+export const ping = {
     command: 'ping',
     description: 'Check bot response time',
     category: 'general',
@@ -27,9 +27,10 @@ export default {
         await reply('📡 Pong!');
         const latency = Date.now() - start;
         
-         await reply(`📡 Pong!\n⏱️
-          Response Time: ${latency}ms\n💭
-          Runtime: ${process.uptime().toFixed(2)}s`);
+         await reply(`
+          📡 Pong!\n⏱️
+          ⏲ Response Time: ${latency}ms\n💭
+          ⏳ Runtime: ${process.uptime().toFixed(2)}s`);
     }
 };
 

@@ -10,7 +10,7 @@ function runtime(seconds) {
     return `${d}d ${h}h ${m}m ${s}s`;
 }
 
- export default {
+export const alive = {
     command: 'alive',
     description: 'Check system status and bot info',
     category: 'general',
@@ -145,6 +145,6 @@ ${config.settings.footer}`];
             await reply("🚨 System diagnostic failed. Please try the command again.");
         }
     }
-};
+}
 
 
